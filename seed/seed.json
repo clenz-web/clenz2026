@@ -324,7 +324,7 @@
 					],
 					"side_image": {
 						"$media": {
-							"url": "https://balitechcenter.com/images/founders.jpg",
+							"url": "/images/founders.jpg",
 							"alt": "Founders Arthur van Eldik and Anja Eckhoff",
 							"filename": "founders-anja-arthur.jpg"
 						}
@@ -1140,7 +1140,7 @@
 					],
 					"side_image": {
 						"$media": {
-							"url": "https://balitechcenter.com/images/founders.jpg",
+							"url": "/images/founders.jpg",
 							"alt": "Founders Arthur van Eldik and Anja Eckhoff",
 							"filename": "founders-anja-arthur.jpg"
 						}
@@ -1992,7 +1992,7 @@
 					],
 					"side_image": {
 						"$media": {
-							"url": "https://balitechcenter.com/images/founders.jpg",
+							"url": "/images/founders.jpg",
 							"alt": "Founders Arthur van Eldik and Anja Eckhoff",
 							"filename": "founders-anja-arthur.jpg"
 						}
