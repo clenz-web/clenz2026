@@ -1,0 +1,68 @@
+---
+import { SITE } from "../site";
+import { t, type Lang } from "../i18n";
+interface Props {
+	lang: Lang;
+	note?: string | null;
+}
+const { lang, note } = Astro.props;
+const L = t(lang);
+---
+
+<section class="section section--mist" id="visit" aria-labelledby="visit-title">
+	<div class="wrap visit">
+		<div class="details">
+			<h2 id="visit-title">{L.visitTitle}</h2>
+			<p class="walkin">{note || L.walkIn}</p>
+			<dl>
+				<div>
+					<dt>{L.hoursTitle}</dt>
+					<dd>{L.hoursDays}, {L.hoursTime}<br />{L.hoursSunday}</dd>
+				</div>
+				<div>
+					<dt>{L.addressTitle}</dt>
+					<dd>
+						{SITE.address.street}, {SITE.address.postcode} {SITE.address.city}<br />
+						<a href={SITE.directionsUrl} target="_blank" rel="noopener">{L.directions}</a>
+					</dd>
+				</div>
+				<div>
+					<dt>{L.callTitle}</dt>
+					<dd>
+						{SITE.phones.map((p) => <><a href={`tel:${p.tel}`}>{p.name}: {p.display}</a><br /></>)}
+					</dd>
+				</div>
+				<div>
+					<dt>{L.emailTitle}</dt>
+					<dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
+				</div>
+			</dl>
+			<div class="btn-row">
+				<a class="btn btn--primary" href={SITE.bookingUrl} target="_blank" rel="noopener">{L.bookOnline}</a>
+			</div>
+		</div>
+		<div class="map">
+			<iframe
+				src={SITE.mapEmbed}
+				title={`${SITE.name}, ${SITE.address.street}, ${SITE.address.city}`}
+				loading="lazy"
+				referrerpolicy="no-referrer-when-downgrade"
+				allowfullscreen
+			></iframe>
+		</div>
+	</div>
+</section>
+
+<style>
+	.visit { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(2rem, 5vw, 4rem); align-items: stretch; }
+	h2 { font-size: var(--step-3); font-weight: 300; letter-spacing: -0.02em; color: var(--pine); }
+	.walkin { margin-top: 0.75rem; color: var(--stone); font-size: var(--step-1); font-weight: 300; line-height: 1.45; }
+	dl { margin-top: 2rem; display: grid; gap: 1.25rem; }
+	dt { font-weight: 500; color: var(--pine); }
+	dd { color: var(--ink); }
+	dd a { color: var(--pine); text-underline-offset: 3px; }
+	.btn-row { margin-top: 2rem; }
+	.map { min-height: 380px; border-radius: var(--radius-lg); overflow: hidden; background: var(--line); }
+	.map iframe { width: 100%; height: 100%; min-height: 380px; border: 0; display: block; }
+	@media (max-width: 860px) { .visit { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,96 @@
+---
+interface Props {
+	items: any[];
+	title: string;
+	prev: string;
+	next: string;
+}
+const { items, title, prev, next } = Astro.props;
+---
+
+{items.length > 0 && (
+	<section class="section section--pine" aria-labelledby="testimonials-title">
+		<div class="wrap">
+			<div class="top">
+				<div class="section-head"><h2 id="testimonials-title">{title}</h2></div>
+				<div class="controls">
+					<button type="button" class="ctl" data-dir="-1" aria-label={prev}>
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+					</button>
+					<button type="button" class="ctl" data-dir="1" aria-label={next}>
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+					</button>
+				</div>
+			</div>
+			<ul class="track" tabindex="0" aria-label={title}>
+				{items.map((it) => (
+					<li class="card">
+						<blockquote>
+							<p>{it.data.quote}</p>
+							<footer>{it.data.title}</footer>
+						</blockquote>
+					</li>
+				))}
+			</ul>
+		</div>
+	</section>
+)}
+
+<script>
+	document.querySelectorAll<HTMLElement>(".track").forEach((track) => {
+		const section = track.closest("section");
+		section?.querySelectorAll<HTMLButtonElement>(".ctl").forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const card = track.querySelector<HTMLElement>(".card");
+				const step = card ? card.offsetWidth + 20 : 320;
+				track.scrollBy({ left: step * Number(btn.dataset.dir), behavior: "smooth" });
+			});
+		});
+	});
+</script>
+
+<style>
+	.top { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; }
+	.controls { display: flex; gap: 0.5rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
+	.ctl {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		border: 1.5px solid rgb(255 255 255 / 0.4);
+		background: transparent;
+		color: var(--white);
+		cursor: pointer;
+	}
+	.ctl:hover { background: rgb(255 255 255 / 0.1); }
+	.ctl svg { width: 20px; height: 20px; margin: auto; display: block; fill: none; stroke: currentColor; stroke-width: 2; }
+	.track {
+		list-style: none;
+		display: grid;
+		grid-auto-flow: column;
+		grid-auto-columns: min(26rem, 85%);
+		gap: 20px;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+		padding-bottom: 0.5rem;
+	}
+	.track::-webkit-scrollbar { display: none; }
+	.card {
+		scroll-snap-align: start;
+		background: rgb(255 255 255 / 0.06);
+		border: 1px solid rgb(255 255 255 / 0.14);
+		border-radius: var(--radius-lg);
+		padding: 2rem;
+	}
+	.card blockquote { display: flex; flex-direction: column; height: 100%; gap: 1.5rem; }
+	.card p {
+		font-size: 1.1rem;
+		font-weight: 300;
+		line-height: 1.6;
+		display: -webkit-box;
+		-webkit-line-clamp: 9;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+	.card footer { margin-top: auto; color: var(--sage); font-weight: 500; }
+</style>

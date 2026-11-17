@@ -1,0 +1,83 @@
+---
+import { pathFor, t, type Lang } from "../i18n";
+import { SITE } from "../site";
+interface Props {
+	lang: Lang;
+	tiles: { slug: string; title: string; text?: string | null }[];
+}
+const { lang, tiles } = Astro.props;
+const L = t(lang);
+const order = ["detox", "massage", "biocleanse"] as const;
+---
+
+<section class="section" aria-labelledby="finder-title">
+	<div class="wrap finder">
+		<div class="section-head">
+			<h2 id="finder-title">{L.finderTitle}</h2>
+			<p>{L.finderText}</p>
+		</div>
+		<div class="choices" role="group" aria-labelledby="finder-title">
+			{order.map((k) => (
+				<button type="button" class="choice" data-target={k} aria-pressed="false">{L.finderOptions[k]}</button>
+			))}
+		</div>
+		<div class="results" aria-live="polite">
+			{order.map((k) => {
+				const tile = tiles.find((x) => x.slug === k);
+				return tile ? (
+					<div class="result" data-result={k} hidden>
+						<p class="label">{L.finderResult}</p>
+						<h3>{tile.title}</h3>
+						{tile.text && <p class="text">{tile.text}</p>}
+						<div class="btn-row">
+							<a class="btn btn--primary" href={pathFor(lang, k)}>{L.finderView}</a>
+							{k !== "biocleanse" && <a class="btn btn--ghost" href={SITE.bookingUrl} target="_blank" rel="noopener">{L.book}</a>}
+						</div>
+					</div>
+				) : null;
+			})}
+		</div>
+	</div>
+</section>
+
+<script>
+	document.querySelectorAll<HTMLElement>(".finder").forEach((root) => {
+		const buttons = root.querySelectorAll<HTMLButtonElement>(".choice");
+		const results = root.querySelectorAll<HTMLElement>(".result");
+		buttons.forEach((btn) => {
+			btn.addEventListener("click", () => {
+				buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+				results.forEach((r) => (r.hidden = r.dataset.result !== btn.dataset.target));
+			});
+		});
+	});
+</script>
+
+<style>
+	.choices { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+	.choice {
+		min-height: 52px;
+		padding: 0.8rem 1.4rem;
+		border-radius: var(--pill);
+		border: 1.5px solid var(--line);
+		background: var(--white);
+		color: var(--ink);
+		font-size: 1.05rem;
+		cursor: pointer;
+		transition: border-color 160ms var(--ease), background-color 160ms var(--ease);
+	}
+	.choice:hover { border-color: var(--sage); }
+	.choice[aria-pressed="true"] { border-color: var(--amber); background: #fbf4ea; color: var(--ink); }
+	.results { margin-top: 1.5rem; }
+	.result {
+		border-left: 3px solid var(--amber);
+		padding: 0.5rem 0 0.5rem 1.5rem;
+		max-width: 40rem;
+		animation: in 260ms var(--ease);
+	}
+	.label { color: var(--amber); font-weight: 500; font-size: var(--step--1); }
+	.result h3 { font-size: var(--step-2); font-weight: 300; color: var(--pine); margin-top: 0.2rem; }
+	.text { color: var(--stone); margin-top: 0.5rem; }
+	.result .btn-row { margin-top: 1.25rem; }
+	@keyframes in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>

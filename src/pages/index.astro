@@ -1,0 +1,8 @@
+---
+import HomeView from "../views/HomeView.astro";
+import { loadHome } from "../lib/load";
+const data = await loadHome("en");
+if (Astro.cache?.enabled) for (const h of data.hints) if (h) Astro.cache.set(h);
+if (!data.home) return Astro.rewrite("/404");
+---
+<HomeView lang="en" data={data} />

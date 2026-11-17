@@ -1,0 +1,25 @@
+---
+interface Props {
+	items: { title: string; text?: string | null }[];
+	columns?: number;
+}
+const { items, columns = 2 } = Astro.props;
+---
+
+<ul class="check" style={`--cols:${columns}`}>
+	{items.map((it) => (
+		<li>
+			<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M7.5 12.5l3 3 6-6.5" /></svg>
+			<span>{it.title}{it.text && <small>{it.text}</small>}</span>
+		</li>
+	))}
+</ul>
+
+<style>
+	.check { list-style: none; display: grid; grid-template-columns: repeat(var(--cols), 1fr); gap: 1rem 2.5rem; }
+	li { display: flex; gap: 0.9rem; align-items: flex-start; font-size: 1.1rem; padding-block: 0.6rem; border-bottom: 1px solid var(--line); }
+	svg { flex: none; width: 26px; height: 26px; fill: none; stroke: var(--pine); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+	svg circle { stroke: var(--sage); }
+	small { display: block; color: var(--stone); font-size: 0.95rem; margin-top: 0.2rem; }
+	@media (max-width: 760px) { .check { grid-template-columns: 1fr; } }
+</style>

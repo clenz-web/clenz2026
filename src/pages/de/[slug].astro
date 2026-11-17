@@ -1,0 +1,14 @@
+---
+import { decodeSlug } from "emdash";
+import PageView from "../../views/PageView.astro";
+import { loadPage } from "../../lib/load";
+const slug = decodeSlug(Astro.params.slug);
+if (!slug) return Astro.rewrite("/404");
+if (slug === "home") return Astro.redirect("/de", 301);
+if (slug === "gallery") return Astro.redirect("/de/inspiration", 301);
+const data = await loadPage("de", slug);
+if (Astro.cache?.enabled) for (const h of data.hints) if (h) Astro.cache.set(h);
+if ("error" in data) return new Response("Could not load this page", { status: 500 });
+if (!data.page) return Astro.rewrite("/404");
+---
+<PageView lang="de" slug={slug} data={data} />

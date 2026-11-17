@@ -1,0 +1,384 @@
+---
+import { getSiteSettingsWithCacheHint } from "emdash";
+import { EmDashBodyEnd, EmDashBodyStart, EmDashHead } from "emdash/ui";
+import { createPublicPageContext } from "emdash/page";
+import { Font } from "astro:assets";
+import { LANG_NAMES, LOCALES, NAV, pathFor, t, type Lang } from "../i18n";
+import { SITE } from "../site";
+import "../styles/tokens.css";
+import "../styles/theme.css";
+
+interface Props {
+	lang: Lang;
+	slug: string;
+	title?: string;
+	description?: string | null;
+	image?: string | null;
+	content?: { collection: string; id: string; slug?: string | null };
+}
+
+const { lang, slug, title, description, content } = Astro.props;
+// Every page shares the same branded image.
+const image = new URL(SITE.shareImage, Astro.site ?? Astro.url).href;
+const L = t(lang);
+
+const settingsResult = await getSiteSettingsWithCacheHint();
+if (Astro.cache?.enabled) Astro.cache.set(settingsResult.cacheHint);
+const settings = settingsResult.data;
+const siteTitle = settings?.title || SITE.name;
+const tagline = L.tagline;
+const fullTitle = title && title !== siteTitle ? `${title} | ${siteTitle}` : `${siteTitle} | ${tagline}`;
+const canonical = new URL(pathFor(lang, slug), SITE.origin).href;
+
+const pageCtx = createPublicPageContext({
+	Astro,
+	kind: content ? "content" : "custom",
+	pageType: "website",
+	title: fullTitle,
+	pageTitle: title ?? siteTitle,
+	description: description || tagline,
+	canonical,
+	image,
+	content,
+	seo: { ogImage: image },
+	siteName: siteTitle,
+});
+
+const current = slug;
+const isLoggedIn = Boolean(Astro.locals.user);
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{fullTitle}</title>
+		<EmDashHead page={pageCtx} />
+		<Font cssVariable="--font-sans" preload />
+		{!content && LOCALES.map((l) => <link rel="alternate" hreflang={l} href={new URL(pathFor(l, slug), SITE.origin).href} />)}
+		{!content && <link rel="alternate" hreflang="x-default" href={new URL(pathFor("en", slug), SITE.origin).href} />}
+		<meta name="theme-color" content="#2f4f43" />
+	</head>
+	<body>
+		<EmDashBodyStart page={pageCtx} />
+		<a class="skip" href="#main">{L.skip}</a>
+
+		<header class="site-header">
+			<div class="wrap header-inner">
+				<a href={pathFor(lang)} class="wordmark" aria-label={`${SITE.name}, ${L.nav.home}`}>
+					<img class="mark" src={SITE.logo} alt="" width="40" height="40" />
+					<span>clenz</span>
+				</a>
+
+				<nav class="nav" aria-label="Main">
+					{NAV.map((s) => (
+						<a href={pathFor(lang, s)} aria-current={current === s ? "page" : undefined}>{L.nav[s]}</a>
+					))}
+				</nav>
+
+				<div class="header-actions">
+					<details class="lang">
+						<summary aria-label={L.language}>{lang.toUpperCase()}</summary>
+						<ul>
+							{LOCALES.map((l) => (
+								<li><a href={pathFor(l, slug)} hreflang={l} lang={l} aria-current={l === lang ? "true" : undefined}>{LANG_NAMES[l]}</a></li>
+							))}
+						</ul>
+					</details>
+					<a class="btn btn--primary book-top" href={SITE.bookingUrl} target="_blank" rel="noopener">{L.book}</a>
+					<button class="menu-btn" type="button" aria-controls="mobile-menu" aria-expanded="false">
+						<span class="visually-hidden">{L.menu}</span>
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18" /></svg>
+					</button>
+				</div>
+			</div>
+		</header>
+
+		<dialog id="mobile-menu" class="mobile-menu" aria-label={L.menu}>
+			<div class="mobile-menu-top">
+				<span class="wordmark-text">clenz</span>
+				<button type="button" class="menu-close">{L.close}</button>
+			</div>
+			<nav aria-label="Mobile">
+				<a href={pathFor(lang)}>{L.nav.home}</a>
+				{NAV.map((s) => <a href={pathFor(lang, s)} aria-current={current === s ? "page" : undefined}>{L.nav[s]}</a>)}
+			</nav>
+			<div class="mobile-langs">
+				{LOCALES.map((l) => <a href={pathFor(l, slug)} hreflang={l} aria-current={l === lang ? "true" : undefined}>{LANG_NAMES[l]}</a>)}
+			</div>
+		</dialog>
+
+		<main id="main">
+			<slot />
+		</main>
+
+		<footer class="site-footer">
+			<div class="wrap footer-grid">
+				<div>
+					<p class="footer-mark"><img class="footer-logo" src={SITE.footerLogo} alt="" width="48" height="48" /><span>clenz</span></p>
+					<p class="footer-tag">{tagline}</p>
+					<div class="footer-social">
+						<a href={SITE.social.instagram} target="_blank" rel="noopener">Instagram</a>
+						<a href={SITE.social.facebook} target="_blank" rel="noopener">Facebook</a>
+					</div>
+				</div>
+				<div>
+					<h2>{L.hoursTitle}</h2>
+					<p>{L.hoursDays}<br />{L.hoursTime}<br />{L.hoursSunday}</p>
+				</div>
+				<div>
+					<h2>{L.addressTitle}</h2>
+					<address>
+						{SITE.address.street}<br />
+						{SITE.address.postcode} {SITE.address.city}<br />
+						{SITE.address.country[lang]}
+					</address>
+				</div>
+				<div>
+					<h2>{L.callTitle}</h2>
+					<p>
+						{SITE.phones.map((p) => <><a href={`tel:${p.tel}`}>{p.name}: {p.display}</a><br /></>)}
+						<a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+					</p>
+				</div>
+			</div>
+			<div class="wrap footer-bottom">
+				<p>{L.disclaimer}</p>
+				<p>
+					© {year} {SITE.name}. {L.rights}
+					<a href={pathFor(lang, "privacy")}>{L.privacy}</a>
+					{isLoggedIn && <a href="/_emdash/admin">Admin</a>}
+				</p>
+			</div>
+		</footer>
+
+		<a class="book-bar" href={SITE.bookingUrl} target="_blank" rel="noopener">{L.book}</a>
+
+		<EmDashBodyEnd page={pageCtx} />
+
+		<script>
+			const dialog = document.getElementById("mobile-menu") as HTMLDialogElement | null;
+			const openBtn = document.querySelector<HTMLButtonElement>(".menu-btn");
+			const closeBtn = document.querySelector<HTMLButtonElement>(".menu-close");
+			openBtn?.addEventListener("click", () => {
+				dialog?.showModal();
+				openBtn.setAttribute("aria-expanded", "true");
+			});
+			closeBtn?.addEventListener("click", () => dialog?.close());
+			dialog?.addEventListener("close", () => openBtn?.setAttribute("aria-expanded", "false"));
+			// Close the language list when clicking elsewhere
+			document.addEventListener("click", (e) => {
+				const lang = document.querySelector<HTMLDetailsElement>("details.lang");
+				if (lang?.open && !lang.contains(e.target as Node)) lang.open = false;
+			});
+		</script>
+
+		<style is:global>
+			@layer base;
+			@layer base {
+				*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+				html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+				body {
+					font-family: var(--font-body);
+					font-size: var(--step-0);
+					line-height: 1.6;
+					color: var(--ink);
+					background: var(--water);
+					-webkit-font-smoothing: antialiased;
+				}
+				h1, h2, h3, h4 { line-height: 1.15; font-weight: 400; }
+				img { max-width: 100%; height: auto; display: block; }
+				a { color: inherit; }
+				address { font-style: normal; }
+				button { font: inherit; }
+			}
+			@media (prefers-reduced-motion: reduce) {
+				html { scroll-behavior: auto; }
+				*, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+			}
+		</style>
+
+		<style>
+			.skip {
+				position: absolute;
+				left: 1rem;
+				top: -4rem;
+				background: var(--pine);
+				color: var(--white);
+				padding: 0.5rem 1rem;
+				border-radius: var(--radius-sm);
+				z-index: 100;
+			}
+			.skip:focus { top: 1rem; }
+
+			.site-header {
+				position: sticky;
+				top: 0;
+				z-index: 40;
+				background: color-mix(in srgb, var(--water) 88%, transparent);
+				backdrop-filter: blur(12px);
+				border-bottom: 1px solid var(--line);
+			}
+			.header-inner {
+				display: flex;
+				align-items: center;
+				gap: 1.5rem;
+				min-height: 72px;
+			}
+			.wordmark {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.55rem;
+				text-decoration: none;
+				color: var(--pine);
+				font-weight: 300;
+				font-size: 1.6rem;
+				letter-spacing: 0.04em;
+			}
+			.mark { height: 40px; width: auto; max-width: 160px; object-fit: contain; }
+			.nav {
+				display: flex;
+				gap: 1.25rem;
+				margin-inline: auto;
+				font-size: 0.95rem;
+			}
+			.nav a {
+				text-decoration: none;
+				color: var(--stone);
+				padding-block: 0.4rem;
+				border-bottom: 2px solid transparent;
+			}
+			.nav a:hover { color: var(--pine); }
+			.nav a[aria-current="page"] { color: var(--pine); border-bottom-color: var(--sage); }
+
+			.header-actions { display: flex; align-items: center; gap: 0.6rem; margin-left: auto; }
+			.lang { position: relative; }
+			.lang summary {
+				list-style: none;
+				cursor: pointer;
+				min-height: 44px;
+				min-width: 44px;
+				display: grid;
+				place-items: center;
+				border-radius: var(--pill);
+				font-size: 0.9rem;
+				font-weight: 500;
+				color: var(--pine);
+			}
+			.lang summary::-webkit-details-marker { display: none; }
+			.lang summary:hover { background: var(--mist); }
+			.lang ul {
+				position: absolute;
+				right: 0;
+				top: calc(100% + 6px);
+				list-style: none;
+				background: var(--white);
+				border: 1px solid var(--line);
+				border-radius: var(--radius-sm);
+				padding: 0.35rem;
+				min-width: 10rem;
+				box-shadow: 0 12px 30px -12px rgb(30 41 37 / 0.25);
+			}
+			.lang a { display: block; padding: 0.55rem 0.8rem; border-radius: 6px; text-decoration: none; }
+			.lang a:hover { background: var(--mist); }
+			.lang a[aria-current="true"] { font-weight: 500; color: var(--pine); }
+
+			.menu-btn {
+				display: none;
+				width: 44px;
+				height: 44px;
+				border: 0;
+				border-radius: var(--pill);
+				background: transparent;
+				color: var(--pine);
+				cursor: pointer;
+			}
+			.menu-btn svg { width: 24px; height: 24px; margin: auto; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; }
+
+			.mobile-menu {
+				margin: 0 0 0 auto;
+				height: 100dvh;
+				max-height: none;
+				width: min(26rem, 100%);
+				border: 0;
+				padding: 1.25rem var(--gutter) 2rem;
+				background: var(--water);
+				color: var(--ink);
+			}
+			.mobile-menu::backdrop { background: rgb(30 41 37 / 0.4); }
+			.mobile-menu-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+			.wordmark-text { font-weight: 300; font-size: 1.6rem; color: var(--pine); letter-spacing: 0.04em; }
+			.menu-close { border: 1.5px solid var(--line); background: transparent; border-radius: var(--pill); padding: 0.55rem 1rem; cursor: pointer; }
+			.mobile-menu nav a {
+				display: block;
+				padding: 0.75rem 0;
+				border-bottom: 1px solid var(--line);
+				font-size: 1.35rem;
+				font-weight: 300;
+				text-decoration: none;
+				color: var(--pine);
+			}
+			.mobile-langs { display: flex; gap: 1rem; margin-top: 1.5rem; }
+			.mobile-langs a { text-decoration: none; color: var(--stone); padding: 0.5rem 0; }
+			.mobile-langs a[aria-current="true"] { color: var(--pine); font-weight: 500; text-decoration: underline; text-underline-offset: 4px; }
+
+			main { min-height: 60vh; }
+
+			.site-footer { background: var(--ink); color: #d6e2dc; padding-top: 4rem; font-size: 0.95rem; }
+			.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 2rem; }
+			.footer-mark { display: flex; align-items: center; gap: 0.7rem; font-size: 2.2rem; font-weight: 300; color: var(--white); letter-spacing: 0.04em; }
+			.footer-logo { height: 48px; width: auto; max-width: 180px; object-fit: contain; }
+			.footer-tag { color: var(--sage); margin-top: 0.25rem; }
+			.footer-social { display: flex; gap: 1.25rem; margin-top: 1.5rem; }
+			.site-footer h2 { font-size: 0.95rem; font-weight: 500; color: var(--white); margin-bottom: 0.6rem; }
+			.site-footer a { color: inherit; text-underline-offset: 3px; }
+			.site-footer a:hover { color: var(--white); }
+			.footer-bottom {
+				display: flex;
+				justify-content: space-between;
+				gap: 1.5rem;
+				flex-wrap: wrap;
+				margin-top: 3rem;
+				padding-block: 1.5rem 2rem;
+				border-top: 1px solid rgb(255 255 255 / 0.12);
+				font-size: 0.85rem;
+				color: #9fb2a9;
+			}
+			.footer-bottom p:last-child { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+			.book-bar { display: none; }
+
+			@media (max-width: 1100px) {
+				.nav { display: none; }
+				.menu-btn { display: grid; }
+			}
+			@media (max-width: 760px) {
+				.book-top { display: none; }
+				.footer-grid { grid-template-columns: 1fr 1fr; }
+				.book-bar {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					position: fixed;
+					left: 1rem;
+					right: 1rem;
+					bottom: calc(1rem + env(safe-area-inset-bottom));
+					z-index: 30;
+					min-height: 52px;
+					border-radius: var(--pill);
+					background: var(--pine);
+					color: var(--white);
+					font-weight: 500;
+					text-decoration: none;
+					box-shadow: 0 10px 30px -8px rgb(30 41 37 / 0.45);
+				}
+				.site-footer { padding-bottom: 5rem; }
+			}
+			@media (max-width: 480px) {
+				.footer-grid { grid-template-columns: 1fr; }
+			}
+		</style>
+	</body>
+</html>

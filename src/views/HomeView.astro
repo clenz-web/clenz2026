@@ -1,0 +1,91 @@
+---
+import type { loadHome } from "../lib/load";
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import ServiceTiles from "../components/ServiceTiles.astro";
+import Checklist from "../components/Checklist.astro";
+import SplitText from "../components/SplitText.astro";
+import Steps from "../components/Steps.astro";
+import Finder from "../components/Finder.astro";
+import Testimonials from "../components/Testimonials.astro";
+import VisitUs from "../components/VisitUs.astro";
+import BookingBanner from "../components/BookingBanner.astro";
+import { pathFor, t, type Lang } from "../i18n";
+import { SITE } from "../site";
+
+interface Props {
+	lang: Lang;
+	data: Awaited<ReturnType<typeof loadHome>>;
+}
+const { lang, data } = Astro.props;
+const L = t(lang);
+const home = data.home as any;
+const d = home.data as any;
+const tiles = data.tiles ?? [];
+const steps = data.steps ?? [];
+const testimonials = data.testimonials ?? [];
+// Shown when no founders photo has been chosen in the admin yet.
+const FOUNDERS = { id: "founders", src: "/images/founders.jpg", alt: "Founders Arthur van Eldik and Anja Eckhoff", width: 1003, height: 1000 };
+---
+
+<Base lang={lang} slug="home" description={d.hero_text} image={d.hero_image?.src}>
+	<Hero variant="home" eyebrow={d.eyebrow} title={d.hero_title || d.title} text={d.hero_text} image={d.hero_image}>
+		<a class="btn btn--light" href={SITE.bookingUrl} target="_blank" rel="noopener">{L.book}</a>
+		<a class="btn btn--ghost" href="#services">{L.explore}</a>
+	</Hero>
+
+	<section class="section" id="services" aria-labelledby="services-title">
+		<div class="wrap">
+			<div class="section-head">
+				<h2 id="services-title">{L.servicesTitle}</h2>
+				<p>{L.servicesText}</p>
+			</div>
+			<ServiceTiles lang={lang} tiles={tiles} />
+		</div>
+	</section>
+
+	{d.highlights?.length > 0 && (
+		<section class="section section--mist">
+			<div class="wrap benefits">
+				<div class="section-head"><h2>{d.highlights_title}</h2></div>
+				<Checklist items={d.highlights} columns={1} />
+			</div>
+		</section>
+	)}
+
+	<section class="section">
+		<div class="wrap">
+			<SplitText title={d.body_title} body={d.body} image={d.side_image ?? FOUNDERS} reverse>
+				<div class="btn-row founders-cta">
+					<a class="btn btn--ghost" href="#services">{L.foundersCta}</a>
+				</div>
+			</SplitText>
+		</div>
+	</section>
+
+	{steps.length > 0 && (
+		<section class="section section--mist" aria-labelledby="steps-title">
+			<div class="wrap">
+				<div class="section-head"><h2 id="steps-title">{L.stepsTitle}</h2></div>
+				<Steps items={steps} />
+				<div class="btn-row steps-more">
+					<a class="btn btn--primary" href={pathFor(lang, "how-it-works")}>{L.stepsMore}</a>
+				</div>
+			</div>
+		</section>
+	)}
+
+	<Finder lang={lang} tiles={tiles} />
+
+	<Testimonials items={testimonials} title={L.testimonialsTitle} prev={L.prev} next={L.next} />
+
+	<VisitUs lang={lang} />
+
+	<BookingBanner title={d.cta_title} text={d.cta_text} bookLabel={L.book} callLabel={L.call} />
+</Base>
+
+<style>
+	.benefits { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+	.founders-cta, .steps-more { margin-top: 2rem; }
+	@media (max-width: 860px) { .benefits { grid-template-columns: 1fr; } }
+</style>

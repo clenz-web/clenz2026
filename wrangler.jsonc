@@ -1,0 +1,27 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "clenz",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-02-24",
+	"compatibility_flags": ["nodejs_compat"],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "clenz",
+			"database_id": "4c97bbc9-11df-470e-8ac1-3866cfcdf892",
+		},
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "clenz-media",
+		},
+	],
+	// Runs on the Workers Free plan: no Worker Loader (sandboxed plugins need a paid plan).
+	// Custom domains clenz.org / www.clenz.org are added at cutover.
+	"workers_dev": true,
+	// General maintenance cron trigger
+	"triggers": {
+		"crons": ["* * * * *"],
+	},
+}

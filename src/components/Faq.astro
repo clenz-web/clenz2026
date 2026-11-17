@@ -1,0 +1,44 @@
+---
+interface Props {
+	items: { question: string; answer: string }[];
+}
+const { items } = Astro.props;
+---
+
+<div class="faq">
+	{items.map((f) => (
+		<details>
+			<summary>{f.question}</summary>
+			<div class="answer">
+				{String(f.answer).split(/\n+/).filter(Boolean).map((p) => <p>{p}</p>)}
+			</div>
+		</details>
+	))}
+</div>
+
+<style>
+	.faq { max-width: 52rem; border-top: 1px solid var(--line); }
+	details { border-bottom: 1px solid var(--line); }
+	summary {
+		list-style: none;
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1.25rem 0;
+		font-size: var(--step-1);
+		font-weight: 400;
+		color: var(--pine);
+	}
+	summary::-webkit-details-marker { display: none; }
+	summary::after {
+		content: "+";
+		font-weight: 300;
+		font-size: 1.6rem;
+		line-height: 1;
+		transition: transform 200ms var(--ease);
+	}
+	details[open] summary::after { transform: rotate(45deg); }
+	.answer { padding-bottom: 1.5rem; max-width: var(--measure); color: var(--ink); }
+	.answer p + p { margin-top: 0.8em; }
+</style>

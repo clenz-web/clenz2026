@@ -1,0 +1,23 @@
+---
+import Base from "../layouts/Base.astro";
+import { isLang, pathFor, t, type Lang } from "../i18n";
+const first = Astro.url.pathname.split("/")[1];
+const lang: Lang = isLang(first) ? first : "en";
+const L = t(lang);
+Astro.response.status = 404;
+---
+<Base lang={lang} slug="home" title={L.notFoundTitle}>
+	<section class="section">
+		<div class="wrap nf">
+			<h1>{L.notFoundTitle}</h1>
+			<p>{L.notFoundText}</p>
+			<div class="btn-row"><a class="btn btn--primary" href={pathFor(lang)}>{L.backHome}</a></div>
+		</div>
+	</section>
+</Base>
+<style>
+	.nf { min-height: 50vh; display: flex; flex-direction: column; justify-content: center; }
+	h1 { font-size: var(--step-4); font-weight: 300; color: var(--pine); letter-spacing: -0.03em; }
+	p { margin-top: 1rem; font-size: var(--step-1); color: var(--stone); }
+	.btn-row { margin-top: 2rem; }
+</style>

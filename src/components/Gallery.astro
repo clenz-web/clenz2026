@@ -1,0 +1,249 @@
+---
+import { Image } from "emdash/ui";
+interface Props {
+	items: { image: any; caption?: string | null }[];
+	openLabel: string;
+	closeLabel: string;
+	prevLabel: string;
+	nextLabel: string;
+}
+const { items, openLabel, closeLabel, prevLabel, nextLabel } = Astro.props;
+const shots = items.filter((g) => g?.image);
+const ratio = (g: any) => {
+	const w = Number(g.image?.width) || 1;
+	const h = Number(g.image?.height) || 1;
+	return Math.max(0.3, Math.min(3, w / h));
+};
+---
+
+<!-- Justified rows: every photo keeps its own shape (no cropping), rows touch edge to edge (no gaps). -->
+<ul class="feed">
+	{shots.map((g, i) => (
+		<li style={`--r:${ratio(g).toFixed(4)}`}>
+			<button type="button" class="shot" data-index={i} data-src={g.image?.src} data-alt={g.caption || g.image?.alt || ""}>
+				<Image image={g.image} sizes="(max-width: 640px) 60vw, 30vw" />
+				<span class="visually-hidden">{openLabel} {i + 1}</span>
+			</button>
+		</li>
+	))}
+	<li class="filler" aria-hidden="true"></li>
+</ul>
+
+<dialog class="lightbox" aria-label={openLabel}>
+	<div class="lb-stage">
+		<img class="lb-img" alt="" draggable="false" />
+	</div>
+	<p class="lb-count" aria-live="polite"></p>
+	<button type="button" class="lb-close" aria-label={closeLabel}>
+		<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+	</button>
+	<button type="button" class="lb-nav lb-prev" aria-label={prevLabel}>
+		<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+	</button>
+	<button type="button" class="lb-nav lb-next" aria-label={nextLabel}>
+		<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+	</button>
+</dialog>
+
+<script>
+	const shots = Array.from(document.querySelectorAll<HTMLButtonElement>(".feed .shot"));
+	const box = document.querySelector<HTMLDialogElement>(".lightbox");
+	const stage = box?.querySelector<HTMLDivElement>(".lb-stage");
+	const img = box?.querySelector<HTMLImageElement>(".lb-img");
+	const count = box?.querySelector<HTMLParagraphElement>(".lb-count");
+
+	if (box && stage && img && shots.length) {
+		let index = 0;
+		// zoom/pan state
+		let scale = 1, tx = 0, ty = 0;
+		// swipe offset (when not zoomed)
+		let swipeX = 0;
+		const pointers = new Map<number, { x: number; y: number }>();
+		let startDist = 0, startScale = 1, startMid = { x: 0, y: 0 }, startTx = 0, startTy = 0;
+		let dragStart = { x: 0, y: 0 }, dragging = false, moved = false;
+		let lastTap = 0;
+
+		const srcOf = (i: number) => {
+			const s = shots[i];
+			return s.dataset.src || s.querySelector("img")?.currentSrc || "";
+		};
+		const preload = (i: number) => { const p = new Image(); p.src = srcOf((i + shots.length) % shots.length); };
+
+		function apply(animate = false) {
+			img!.style.transition = animate ? "transform 260ms cubic-bezier(.2,.7,.2,1)" : "none";
+			img!.style.transform = `translate3d(${tx + swipeX}px, ${ty}px, 0) scale(${scale})`;
+			box!.classList.toggle("is-zoomed", scale > 1.01);
+		}
+		function clampPan() {
+			const r = img!.getBoundingClientRect();
+			const w = r.width / scale, h = r.height / scale;
+			const maxX = Math.max(0, (w * scale - window.innerWidth) / 2);
+			const maxY = Math.max(0, (h * scale - window.innerHeight) / 2);
+			tx = Math.min(maxX, Math.max(-maxX, tx));
+			ty = Math.min(maxY, Math.max(-maxY, ty));
+		}
+		function resetZoom(animate = false) { scale = 1; tx = 0; ty = 0; swipeX = 0; apply(animate); }
+		function zoomAt(newScale: number, cx: number, cy: number, animate = false) {
+			newScale = Math.min(5, Math.max(1, newScale));
+			const ox = cx - window.innerWidth / 2, oy = cy - window.innerHeight / 2;
+			tx = ox - ((ox - tx) * newScale) / scale;
+			ty = oy - ((oy - ty) * newScale) / scale;
+			scale = newScale;
+			if (scale === 1) { tx = 0; ty = 0; }
+			clampPan();
+			apply(animate);
+		}
+		function show(i: number) {
+			index = (i + shots.length) % shots.length;
+			const s = shots[index];
+			img!.src = srcOf(index);
+			img!.alt = s.dataset.alt || "";
+			count!.textContent = `${index + 1} / ${shots.length}`;
+			resetZoom();
+			preload(index + 1); preload(index - 1);
+		}
+		function go(dir: number) {
+			if (scale > 1.01) resetZoom(true);
+			img!.style.transition = "transform 180ms ease, opacity 180ms ease";
+			img!.style.opacity = "0";
+			img!.style.transform = `translate3d(${dir * -60}px,0,0)`;
+			setTimeout(() => {
+				show(index + dir);
+				img!.style.transition = "none";
+				img!.style.transform = `translate3d(${dir * 60}px,0,0)`;
+				requestAnimationFrame(() => {
+					img!.style.transition = "transform 220ms ease, opacity 220ms ease";
+					img!.style.opacity = "1";
+					img!.style.transform = "translate3d(0,0,0) scale(1)";
+				});
+			}, 170);
+		}
+
+		shots.forEach((s, i) => s.addEventListener("click", () => {
+			show(i);
+			img!.style.opacity = "1";
+			box.showModal();
+			document.documentElement.style.overflow = "hidden";
+		}));
+		box.addEventListener("close", () => { document.documentElement.style.overflow = ""; resetZoom(); });
+		box.querySelector(".lb-close")?.addEventListener("click", () => box.close());
+		box.querySelector(".lb-prev")?.addEventListener("click", () => go(-1));
+		box.querySelector(".lb-next")?.addEventListener("click", () => go(1));
+		box.addEventListener("keydown", (e) => {
+			if (e.key === "ArrowLeft") go(-1);
+			if (e.key === "ArrowRight") go(1);
+		});
+
+		// Wheel / trackpad pinch zoom
+		stage.addEventListener("wheel", (e) => {
+			e.preventDefault();
+			const factor = Math.exp(-e.deltaY * (e.ctrlKey ? 0.01 : 0.0025));
+			zoomAt(scale * factor, e.clientX, e.clientY);
+		}, { passive: false });
+
+		// Pointer: swipe, pan, pinch, double-tap
+		stage.addEventListener("pointerdown", (e) => {
+			stage.setPointerCapture(e.pointerId);
+			pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+			moved = false;
+			if (pointers.size === 1) {
+				dragging = true;
+				dragStart = { x: e.clientX, y: e.clientY };
+				startTx = tx; startTy = ty;
+			} else if (pointers.size === 2) {
+				const [a, b] = [...pointers.values()];
+				startDist = Math.hypot(a.x - b.x, a.y - b.y);
+				startScale = scale;
+				startMid = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+				swipeX = 0;
+			}
+		});
+		stage.addEventListener("pointermove", (e) => {
+			if (!pointers.has(e.pointerId)) return;
+			pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+			if (pointers.size === 2) {
+				const [a, b] = [...pointers.values()];
+				const d = Math.hypot(a.x - b.x, a.y - b.y);
+				moved = true;
+				zoomAt(startScale * (d / (startDist || 1)), startMid.x, startMid.y);
+				return;
+			}
+			if (!dragging) return;
+			const dx = e.clientX - dragStart.x, dy = e.clientY - dragStart.y;
+			if (Math.abs(dx) > 4 || Math.abs(dy) > 4) moved = true;
+			if (scale > 1.01) { tx = startTx + dx; ty = startTy + dy; clampPan(); }
+			else swipeX = dx;
+			apply();
+		});
+		const end = (e: PointerEvent) => {
+			if (!pointers.has(e.pointerId)) return;
+			pointers.delete(e.pointerId);
+			if (pointers.size === 1) {
+				// continue as pan from the remaining finger
+				const [p] = [...pointers.values()];
+				dragStart = p; startTx = tx; startTy = ty; return;
+			}
+			if (pointers.size > 0) return;
+			dragging = false;
+			if (scale <= 1.01) {
+				if (swipeX < -60) { swipeX = 0; go(1); return; }
+				if (swipeX > 60) { swipeX = 0; go(-1); return; }
+				resetZoom(true);
+			}
+			if (!moved) {
+				const now = Date.now();
+				if (now - lastTap < 300) {
+					lastTap = 0;
+					if (scale > 1.01) resetZoom(true); else zoomAt(2.5, e.clientX, e.clientY, true);
+				} else {
+					lastTap = now;
+					// single tap on the dark backdrop closes
+					const t = e.target as HTMLElement;
+					if (t === stage && scale <= 1.01) setTimeout(() => { if (lastTap === now) box.close(); }, 300);
+				}
+			}
+		};
+		stage.addEventListener("pointerup", end);
+		stage.addEventListener("pointercancel", end);
+	}
+</script>
+
+<style>
+	.feed {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0;
+		--row: 280px;
+	}
+	.feed li {
+		flex: var(--r) 1 calc(var(--r) * var(--row));
+		aspect-ratio: var(--r);
+		margin: 0;
+		min-width: 0;
+	}
+	.feed .filler { flex: 999 1 0; aspect-ratio: auto; height: 0; }
+	.shot { display: block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background: var(--mist); overflow: hidden; cursor: zoom-in; }
+	.shot :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--ease), filter 300ms ease; }
+	.shot:hover :global(img) { transform: scale(1.03); filter: brightness(1.04); }
+	@media (max-width: 900px) { .feed { --row: 200px; } }
+	@media (max-width: 560px) { .feed { --row: 130px; } }
+
+	.lightbox { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; border: 0; background: rgb(12 18 15 / 0.96); padding: 0; overflow: hidden; }
+	.lightbox::backdrop { background: rgb(12 18 15 / 0.96); }
+	.lightbox[open] { display: block; }
+	.lb-stage { position: absolute; inset: 0; display: grid; place-items: center; touch-action: none; user-select: none; cursor: zoom-in; }
+	.lightbox.is-zoomed .lb-stage { cursor: grab; }
+	.lb-img { max-width: 94vw; max-height: 88dvh; object-fit: contain; will-change: transform; transform-origin: center center; pointer-events: none; }
+	.lb-count { position: absolute; top: 1.1rem; left: 50%; translate: -50% 0; margin: 0; color: rgb(255 255 255 / 0.8); font-size: 0.85rem; letter-spacing: 0.08em; }
+	.lb-close, .lb-nav { position: absolute; border: 0; border-radius: 50%; background: rgb(255 255 255 / 0.14); color: var(--white); cursor: pointer; width: 48px; height: 48px; display: grid; place-items: center; backdrop-filter: blur(6px); }
+	.lb-close:hover, .lb-nav:hover { background: rgb(255 255 255 / 0.26); }
+	.lb-close svg, .lb-nav svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+	.lb-close { top: 0.8rem; right: 0.8rem; }
+	.lb-nav { top: 50%; translate: 0 -50%; }
+	.lb-prev { left: 1rem; }
+	.lb-next { right: 1rem; }
+	@media (hover: none) { .lb-nav { display: none; } }
+</style>

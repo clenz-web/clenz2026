@@ -1,0 +1,44 @@
+---
+import { SITE } from "../site";
+interface Props {
+	title?: string | null;
+	text?: string | null;
+	bookLabel: string;
+	callLabel: string;
+}
+const { title, text, bookLabel, callLabel } = Astro.props;
+---
+
+{title && (
+	<section class="banner-wrap">
+		<div class="wrap">
+			<div class="banner">
+				<div>
+					<h2>{title}</h2>
+					{text && <p>{text}</p>}
+				</div>
+				<div class="btn-row">
+					<a class="btn btn--light" href={SITE.bookingUrl} target="_blank" rel="noopener">{bookLabel}</a>
+					<a class="btn btn--ghost" href={`tel:${SITE.phones[0].tel}`}>{callLabel.replace("{name}", SITE.phones[0].name)}</a>
+				</div>
+			</div>
+		</div>
+	</section>
+)}
+
+<style>
+	.banner-wrap { padding-block: var(--section); }
+	.banner {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 2rem;
+		background: var(--pine);
+		color: var(--white);
+		border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 120px;
+		padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 4rem);
+	}
+	h2 { font-size: var(--step-3); font-weight: 300; letter-spacing: -0.02em; }
+	p { margin-top: 0.6rem; color: #cfe0d7; max-width: 36rem; }
+</style>

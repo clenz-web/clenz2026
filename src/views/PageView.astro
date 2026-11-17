@@ -1,0 +1,137 @@
+---
+import { PortableText } from "emdash/ui";
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import TreatmentMenu from "../components/TreatmentMenu.astro";
+import Checklist from "../components/Checklist.astro";
+import SplitText from "../components/SplitText.astro";
+import Steps from "../components/Steps.astro";
+import Faq from "../components/Faq.astro";
+import Testimonials from "../components/Testimonials.astro";
+import VisitUs from "../components/VisitUs.astro";
+import BookingBanner from "../components/BookingBanner.astro";
+import Gallery from "../components/Gallery.astro";
+import TreatmentMoments from "../components/TreatmentMoments.astro";
+import { t, type Lang } from "../i18n";
+import { SITE } from "../site";
+
+interface Props {
+	lang: Lang;
+	slug: string;
+	data: { page: any; treatments: any[]; testimonials: any[] };
+	/** Show the scroll-driven treatment sequence (used by /massage-preview until approved) */
+	moments?: boolean;
+}
+const { lang, slug, data, moments: showMoments = false } = Astro.props;
+const L = t(lang);
+const page = data.page;
+const d = page.data as any;
+const tpl: string = d.template;
+const { treatments, testimonials } = data;
+
+const isLegal = tpl === "legal";
+const bookable = ["treatments", "info", "home"].includes(tpl);
+// Massage page: scroll-driven treatment sequence
+// Massage and detox pages: scroll-driven treatment sequence
+const momentsCopy: any = slug === "detox" ? L.momentsDetox : L.moments;
+const moments = (slug === "massage" || slug === "detox" || showMoments) && treatments.length > 0 && momentsCopy ? momentsCopy : null;
+---
+
+<Base lang={lang} slug={slug} title={d.title} description={d.hero_text} image={d.hero_image?.src} content={{ collection: "pages", id: d.id, slug: page.id }}>
+	{moments ? (
+		<TreatmentMoments
+			treatments={treatments}
+			eyebrow={d.eyebrow}
+			headline={moments.headline}
+			headlineItalic={moments.headlineItalic}
+			intro={moments.intro}
+			bookLabel={L.book}
+		/>
+	) : isLegal ? (
+		<section class="section legal">
+			<div class="wrap">
+				<h1>{d.hero_title || d.title}</h1>
+				<div class="prose"><PortableText value={d.body ?? []} /></div>
+			</div>
+		</section>
+	) : (
+		<Hero eyebrow={d.eyebrow} title={d.hero_title || d.title} text={d.hero_text} image={d.hero_image} price={d.price_label}>
+			{tpl === "product" ? (
+				<>
+					<a class="btn btn--primary" href={`mailto:${SITE.email}?subject=BioCleanse`}>{L.enquire}</a>
+					<a class="btn btn--ghost" href={`tel:${SITE.phones[0].tel}`}>{String(L.call).replace("{name}", SITE.phones[0].name)}</a>
+				</>
+			) : tpl === "contact" ? (
+				<a class="btn btn--primary" href={SITE.bookingUrl} target="_blank" rel="noopener">{L.bookOnline}</a>
+			) : bookable ? (
+				<a class="btn btn--primary" href={SITE.bookingUrl} target="_blank" rel="noopener">{L.book}</a>
+			) : null}
+		</Hero>
+	)}
+
+	{!moments && treatments.length > 0 && (
+		<section class="section section--mist" aria-labelledby="menu-title">
+			<div class="wrap">
+				<div class="section-head"><h2 id="menu-title">{L.treatmentsTitle}</h2></div>
+				<TreatmentMenu treatments={treatments} bookLabel={L.book} />
+			</div>
+		</section>
+	)}
+
+	{tpl === "info" && d.highlights?.length > 0 && (
+		<section class="section section--mist">
+			<div class="wrap">
+				<div class="section-head"><h2>{d.highlights_title}</h2></div>
+				<Steps items={d.highlights} />
+			</div>
+		</section>
+	)}
+
+	{tpl !== "info" && d.highlights?.length > 0 && (
+		<section class="section">
+			<div class="wrap two-col">
+				<div class="section-head"><h2>{d.highlights_title}</h2></div>
+				<Checklist items={d.highlights} columns={tpl === "product" ? 2 : 1} />
+			</div>
+		</section>
+	)}
+
+	{!isLegal && tpl !== "contact" && (d.body?.length > 0) && (
+		<section class:list={["section", { "section--mist": tpl === "product" }]}>
+			<div class="wrap">
+				<SplitText title={d.body_title} body={d.body} image={d.side_image} />
+			</div>
+		</section>
+	)}
+
+	{tpl === "gallery" && d.gallery?.length > 0 && (
+		<section class="section section--first">
+			<div class="wrap">
+				<Gallery items={d.gallery} openLabel={L.galleryOpen} closeLabel={L.close} prevLabel={L.prev} nextLabel={L.next} />
+			</div>
+		</section>
+	)}
+
+
+	{d.faqs?.length > 0 && (
+		<section class="section" aria-labelledby="faq-title">
+			<div class="wrap">
+				<div class="section-head"><h2 id="faq-title">{L.faqTitle}</h2></div>
+				<Faq items={d.faqs} />
+			</div>
+		</section>
+	)}
+
+	{testimonials.length > 0 && <Testimonials items={testimonials} title={L.testimonialsTitle} prev={L.prev} next={L.next} />}
+
+	{tpl === "contact" && <VisitUs lang={lang} note={d.body?.[0]?.children?.map((c: any) => c.text).join("")} />}
+
+	{!isLegal && tpl !== "contact" && <BookingBanner title={d.cta_title} text={d.cta_text} bookLabel={L.book} callLabel={L.call} />}
+</Base>
+
+<style>
+	.two-col { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+	.section--first { padding-top: 0; }
+	.legal h1 { font-size: var(--step-3); font-weight: 300; color: var(--pine); margin-bottom: 2rem; }
+	@media (max-width: 860px) { .two-col { grid-template-columns: 1fr; } }
+</style>

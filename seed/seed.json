@@ -1,0 +1,3789 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"defaultLocale": "en",
+	"meta": {
+		"name": "Clenz",
+		"description": "Detox and massage in Roermond. Official BioCleanse distributor.",
+		"author": "Clenz"
+	},
+	"settings": {
+		"title": "Clenz",
+		"tagline": "Detox and massage in Roermond"
+	},
+	"collections": [
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"urlPattern": "/{slug}",
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "template",
+					"label": "Layout",
+					"type": "select",
+					"required": true,
+					"translatable": false,
+					"validation": {
+						"options": [
+							"home",
+							"treatments",
+							"product",
+							"info",
+							"gallery",
+							"contact",
+							"legal"
+						]
+					}
+				},
+				{
+					"slug": "eyebrow",
+					"label": "Small label above the title",
+					"type": "string"
+				},
+				{
+					"slug": "hero_title",
+					"label": "Hero headline",
+					"type": "string",
+					"searchable": true
+				},
+				{
+					"slug": "hero_text",
+					"label": "Hero text",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "hero_image",
+					"label": "Hero image",
+					"type": "image",
+					"translatable": false
+				},
+				{
+					"slug": "price_label",
+					"label": "Price line (product pages)",
+					"type": "string"
+				},
+				{
+					"slug": "highlights_title",
+					"label": "Highlights heading",
+					"type": "string"
+				},
+				{
+					"slug": "highlights",
+					"label": "Highlights (benefits, steps or settings)",
+					"type": "repeater",
+					"validation": {
+						"maxItems": 12,
+						"subFields": [
+							{
+								"slug": "title",
+								"label": "Title",
+								"type": "string",
+								"required": true
+							},
+							{
+								"slug": "text",
+								"label": "Text",
+								"type": "text"
+							}
+						]
+					}
+				},
+				{
+					"slug": "body_title",
+					"label": "Main section heading",
+					"type": "string"
+				},
+				{
+					"slug": "body",
+					"label": "Main section text",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "side_image",
+					"label": "Main section image",
+					"type": "image",
+					"translatable": false
+				},
+				{
+					"slug": "faqs",
+					"label": "Questions and answers",
+					"type": "repeater",
+					"validation": {
+						"maxItems": 20,
+						"subFields": [
+							{
+								"slug": "question",
+								"label": "Question",
+								"type": "string",
+								"required": true
+							},
+							{
+								"slug": "answer",
+								"label": "Answer",
+								"type": "text",
+								"required": true
+							}
+						]
+					}
+				},
+				{
+					"slug": "gallery",
+					"label": "Gallery",
+					"type": "repeater",
+					"translatable": false,
+					"validation": {
+						"maxItems": 48,
+						"subFields": [
+							{
+								"slug": "image",
+								"label": "Image",
+								"type": "image",
+								"required": true
+							},
+							{
+								"slug": "caption",
+								"label": "Caption",
+								"type": "string"
+							}
+						]
+					}
+				},
+				{
+					"slug": "cta_title",
+					"label": "Booking banner heading",
+					"type": "string"
+				},
+				{
+					"slug": "cta_text",
+					"label": "Booking banner text",
+					"type": "text"
+				}
+			]
+		},
+		{
+			"slug": "treatments",
+			"label": "Treatments",
+			"labelSingular": "Treatment",
+			"supports": [
+				"drafts",
+				"revisions",
+				"search"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Name",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "category",
+					"label": "Category",
+					"type": "select",
+					"required": true,
+					"translatable": false,
+					"validation": {
+						"options": [
+							"detox",
+							"massage"
+						]
+					}
+				},
+				{
+					"slug": "image",
+					"label": "Photo",
+					"type": "image",
+					"translatable": false
+				},
+				{
+					"slug": "prices",
+					"label": "Durations and prices",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "summary",
+					"label": "Short description",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "sort_order",
+					"label": "Order",
+					"type": "integer",
+					"translatable": false
+				}
+			]
+		},
+		{
+			"slug": "testimonials",
+			"label": "Testimonials",
+			"labelSingular": "Testimonial",
+			"supports": [
+				"drafts"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Client name",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "quote",
+					"label": "Quote",
+					"type": "text",
+					"required": true
+				},
+				{
+					"slug": "sort_order",
+					"label": "Order",
+					"type": "integer",
+					"translatable": false
+				}
+			]
+		}
+	],
+	"content": {
+		"pages": [
+			{
+				"id": "page-home-en",
+				"slug": "home",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"template": "home",
+					"title": "Home",
+					"eyebrow": "Detox and massage in Roermond",
+					"hero_title": "Detox. Relax. Renew.",
+					"hero_text": "A calm studio for the BioCleanse detox footbath and massage, run by founders Anja and Arthur. Clenz is also the official BioCleanse distributor for the Benelux and Europe.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/906023.jpg",
+							"alt": "Feet splashing in clear water",
+							"filename": "906023.jpg"
+						}
+					},
+					"highlights_title": "What a detox footbath can do for you",
+					"highlights": [
+						{
+							"title": "Sleep deeper, wake up rested",
+							"text": ""
+						},
+						{
+							"title": "More energy during the day",
+							"text": ""
+						},
+						{
+							"title": "Experience less stress and tension",
+							"text": ""
+						},
+						{
+							"title": "More balance between sense & feeling",
+							"text": ""
+						},
+						{
+							"title": "Very helpful with intestinal complaints, various skin complaints & more",
+							"text": ""
+						}
+					],
+					"body_title": "The Founders",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k1",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": "“Clenz” was originally founded in Amsterdam by husband and wife Arthur van Eldik and Anja Eckhoff. Arthur was diagnosed with hepatitis C and on the verge of liver failure with liver value of nearly 3500 (which should be between 30 and 40). Specialists and doctors were skeptical, if he could survive this. They suggested a type of chemotherapy that had little hope of success. At the same time Anja discovered the “Biocleanse” machine made by an American scientist. Desperate for an alternative solution, they decided to purchase the Biocleanse detox foot bath to treat the hepatitis C. The result was a liver with healthy low levels! They have now opened a new clinic in Roermond, where they offer their practical experiences of more than 15 years in the detox and wellness industry. Call for more information or pass by to the clinic to see if we can help you support your health.",
+									"marks": []
+								}
+							]
+						}
+					],
+					"side_image": {
+						"$media": {
+							"url": "https://balitechcenter.com/images/founders.jpg",
+							"alt": "Founders Arthur van Eldik and Anja Eckhoff",
+							"filename": "founders-anja-arthur.jpg"
+						}
+					},
+					"cta_title": "Ready to feel lighter?",
+					"cta_text": "Book online in a minute, or just walk in during opening hours."
+				}
+			},
+			{
+				"id": "page-detox-en",
+				"slug": "detox",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"template": "treatments",
+					"title": "Detox",
+					"eyebrow": "Detox",
+					"hero_title": "Remove the toxic elements from your body",
+					"hero_text": "Sit back with your feet in warm water while the BioCleanse ionic footbath gently supports your body's own cleansing system.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/session.jpg",
+							"alt": "Detox footbath session",
+							"filename": "session.jpg"
+						}
+					},
+					"highlights_title": "Effect of the treatment",
+					"highlights": [
+						{
+							"title": "Sleep deeper, wake up rested",
+							"text": ""
+						},
+						{
+							"title": "More energy during the day",
+							"text": ""
+						},
+						{
+							"title": "Experience less stress and tension",
+							"text": ""
+						},
+						{
+							"title": "More balance between sense & feeling",
+							"text": ""
+						},
+						{
+							"title": "Very helpful with intestinal complaints, various skin complaints & more",
+							"text": ""
+						}
+					],
+					"body_title": "How the ionic footbath works",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "The module supplies an electrical current to the water in the footwell. This low-level current produces metal in the series and the water and salt from the foot bath generates negative and positively charged ions. The negative ions move through the body to attach themselves to toxic substances with an opposite charge. Most toxins in our body have a positive charge, so that they are neutralized and then pulled out of the body by osmosis because of their attraction to the ion field in the spa water. The BioCleanse can help cells to stabilize so that physiological functions can work at an optimal level. This can help restore the immune system. The negative ions can raise your pH to a more alkaline level, which is thought to help fight many types of diseases. Your BioCleanse foot cleaning also contains many frequencies that are designed to meet certain conditions. The BioCleanse foot bath comes with pre-timed sequences, including, fibromyalgia, arthritis, parasites, pathogens and relaxation, each with 31 different frequencies. All are considered as Rife Frequencies. The timed settings have one frequency everywhere and the Schumann setting has the Schumann frequency throughout the series.",
+									"marks": []
+								}
+							]
+						}
+					],
+					"side_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/footbath.jpg",
+							"alt": "BioCleanse footbath",
+							"filename": "footbath.jpg"
+						}
+					},
+					"cta_title": "Start with a single session",
+					"cta_text": "Most clients follow a programme of 10 sessions over 3 to 5 weeks."
+				}
+			},
+			{
+				"id": "page-massage-en",
+				"slug": "massage",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"template": "treatments",
+					"title": "Massage",
+					"eyebrow": "Massage",
+					"hero_title": "Enjoy the good life. Enjoy a massage.",
+					"hero_text": "From relaxing, hot stone and deep tissue to sports, pregnancy and duo massage, every treatment is tailored to what your body needs today.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/massage1.jpg",
+							"alt": "Relaxing back massage",
+							"filename": "massage1.jpg"
+						}
+					},
+					"body_title": "Massage room and rules",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k5",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": "The modern Clenz studio has solid massage tables and a perfectly seated massage chair. We apply the following rules for the massage:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "We use clean towels for every client. If you prefer to use your own, this is of course also possible. We also appreciate it if every client is clean or showered before the massage treatment.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k9",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k10",
+									"text": "The practice is not for giving erotic massages.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k11",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k12",
+									"text": "If you are already being treated by a doctor, therapist, specialist or something similar, you can consult with this doctor in advance whether a massage can cause problems that may disrupt your treatment.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k13",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": "If you are unable to attend, you must cancel your appointment MINIMUM 12 HOURS before the start. Telephone: Anja 06-28770946 or Arthur 06-28770947. The costs for an appointment that has not been canceled or that are canceled too late will be charged.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k15",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k16",
+									"text": "When you have a good feeling about it yourself, you can just get a massage if you are pregnant.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k17",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k18",
+									"text": "The massage practice is not liable for damage, loss or theft of personal belongings.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k19",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k20",
+									"text": "Smoking is not permitted in our practice.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k21",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k22",
+									"text": "Before the start of your first massage treatment, we ask you a number of questions to gain insight into your medical and sporting data. When in doubt about the treatment of an existing condition, the masseur has the right to stop the treatment and refer you to a doctor. If your doctor agrees, you can of course make a follow-up appointment.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k23",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": "You must inform us of any use of medication, treatment by a doctor, therapist or specialist before the start of the massage. In a number of cases an adjustment of the treatment is necessary.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k25",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": "We cannot provide treatment to clients with a post-traumatic or pathological condition. You can go to a physiotherapist without an appointment.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						}
+					],
+					"side_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/podiumn.jpg",
+							"alt": "Treatment room at Clenz",
+							"filename": "podiumn.jpg"
+						}
+					},
+					"cta_title": "Time to unwind",
+					"cta_text": "Choose your massage and a time that suits you."
+				}
+			},
+			{
+				"id": "page-biocleanse-en",
+				"slug": "biocleanse",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"template": "product",
+					"title": "Biocleanse",
+					"eyebrow": "For therapists and home use",
+					"hero_title": "The BioCleanse ionic detox footbath",
+					"hero_text": "Clenz is the official company and distributor of the BioCleanse detox footbath unit in the Benelux and Europe, for therapists and private use.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/kit.jpg",
+							"alt": "BioCleanse ionic detox footbath kit",
+							"filename": "kit.jpg"
+						}
+					},
+					"price_label": "BioCleanse kit €2,300, water module €119.95",
+					"highlights_title": "Programme settings",
+					"highlights": [
+						{
+							"title": "Arthritis",
+							"text": ""
+						},
+						{
+							"title": "Fibromyalgia",
+							"text": ""
+						},
+						{
+							"title": "Pathogens",
+							"text": ""
+						},
+						{
+							"title": "Parasites",
+							"text": ""
+						},
+						{
+							"title": "Schumann",
+							"text": ""
+						},
+						{
+							"title": "Relaxation",
+							"text": ""
+						}
+					],
+					"body_title": "About BioCleanse",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k53",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k54",
+									"text": "The BioCleanse Ionic Detox foot bath can be used for therapists, personal trainers, private, spas and detox routines clinics. BioCleanse Ionic foot baths have been used by many people for many years as part of their detox routine. Some of the reported experiences include a greater sense of well-being, improved sleep, increased vitality, pain and stress relief, and symptomatic relief of swollen and painful joints. A foot bath session is an external method that can help in detoxing and eliminating natural waste. The Bio Cleanse unit settings are: arthritis, fibromyalgia, pathogens, parasites, Schumann and relaxation. You receive Rife frequencies at the same time and benefit from the Bio Cleanse charge and Ionization.",
+									"marks": []
+								}
+							]
+						}
+					],
+					"side_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/footbath.jpg",
+							"alt": "BioCleanse footbath in use",
+							"filename": "footbath.jpg"
+						}
+					},
+					"faqs": [
+						{
+							"question": "How does it work?",
+							"answer": "The module supplies an electrical current to the water in the footwell. This low-level current produces metal in the series and the water and salt from the foot bath generates negative and positively charged ions. The negative ions move through the body to attach themselves to toxic substances with an opposite charge. Most toxins in our body have a positive charge, so they are neutralized and then pulled out of the body by osmosis because of their attraction to the ion field in the spa water.\n\nThe BioCleanse can help cells to stabilize so that physiological functions can work at an optimal level. This can help restore the immune system. The negative ions can raise your pH to a more alkaline level, which is thought to help fight many types of diseases. Your BioCleanse foot cleaning also contains many frequencies that are designed to meet certain conditions.\n\nThe BioCleanse foot bath comes with pre-timed sequences, including cancer, fibromyalgia, arthritis, parasites, pathogens and relaxation, each with 31 different frequencies. All are considered as Rife Frequencies. The timed settings have one frequency everywhere and the Schumann setting has the Schumann frequency throughout the series."
+						},
+						{
+							"question": "Specification",
+							"answer": "Input: 110/220 V retreated to 24V with an adapter (included)\nPower cord: North American or any type as required (they are interchangeable)\nOutput: 24 V or approximately 5 Amps. We have a current limiter inline to reduce the output to a maximum of 2.4 amps.\nWater module: two included. Each delivers 90 - 100 for 30 minutes. sessions\nWarranty: 5 years for the unit, 2 years for the power supply and 30 days for the module. Warranty is not transferable."
+						},
+						{
+							"question": "What is included?",
+							"answer": "Main control unit\nPower cord - One end with a plug for your adapter, the other end with a plug for your outlet.\nAdapter - The black, rectangular, heavy-duty device with one cord to connect to the power outlet on the back of your main control unit. The adapter converts your alternating current to a 24 V direct current so that the main control unit functions properly.\nWater Modules - Two included. These are the submersible units that are equipped with an RCA plug to connect to one of the two RCA connectors on the front of your main control unit."
+						},
+						{
+							"question": "Use",
+							"answer": "Drink 6 to 8 glasses of water daily during your treatment sessions and up to one week after your sessions. Your cleansing sessions distribute damaged cells in your body and the water you drink will flush these cells, other toxins and heavy metals out of your body.\n\nIt is recommended that you use your BioCleanse machine only every other day for only 20 - 40 minutes and only for a maximum of two weeks at a time. After the two-week sessions, you must take a week without any BioCleanse sessions so that your body cells can rejuvenate. You have just completed a rigorous change in the cells of your body that will still wash away from your body. Make sure you also drink a lot of water during the \"off\" week, because your body is still detoxifying."
+						},
+						{
+							"question": "Disclaimers",
+							"answer": "The BioCleanse machine is an experimental therapeutic device. It is advisable to consult your authorized representative or health professional before using this equipment. Please note that you accept all risks associated with the use of the BioCleanse machine. Carefully review all instructions provided with this equipment before you begin a BioCleanse session. This description is only intended for general information and educational purposes. The information contained herein has not been evaluated by the FDA and is not intended to cure, prevent disease, or prescribe or use for diagnosis."
+						},
+						{
+							"question": "Return policy",
+							"answer": "The product can be returned within 30 days of receipt. There is a surcharge of 5% for restock. Shipping costs will not be returned. Modules / arrays cannot be returned and the retail costs of the arrays are deducted from the reimbursement amount. The customer must return the device at the customer's expense. The device must be in perfect condition without scratches or defects, in the original box with all paperwork and accessories. Extra costs arise if the device is returned with damage or not in the original packaging with paperwork. Returns are not permitted after 30 days. Must be stamped no later than 30 days after the date of receipt. Before returning, the customer must call for an RMA #."
+						}
+					],
+					"cta_title": "Interested in your own BioCleanse?",
+					"cta_text": "Call or email us for advice, a demonstration or an order."
+				}
+			},
+			{
+				"id": "page-how-it-works-en",
+				"slug": "how-it-works",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"template": "info",
+					"title": "How it works",
+					"eyebrow": "The science",
+					"hero_title": "How the detox footbath works",
+					"hero_text": "What happens during a session, why the water changes colour and how to get the most out of your programme.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/clenz-3.jpg",
+							"alt": "Detox footbath basins",
+							"filename": "clenz-3.jpg"
+						}
+					},
+					"highlights_title": "Step by step",
+					"highlights": [
+						{
+							"title": "Function",
+							"text": "Detoxification of your body largely takes place through your skin, without counting your lungs. Because our body contains up to 80% water, it only makes sense that water plays a major role in this process. The Detox foot bath functions by activating the cells and improving your metabolism. All organs are rendered harmless and all of these help the body to restore health, improve immunity and eradicate pathogens ... this results in a renewal of body and mind."
+						},
+						{
+							"title": "Procedure",
+							"text": "You immerse your feet in a foot bath with warm water. The biocleanse detox foot bath unit is set to the correct time settings and ionization levels. Then you sit back and relax for 45 minutes as the biocleanse foot bath begins to extract toxins from the entire body, including the kidneys and liver, stimulating their ability to detoxify and improve your body. Customers are advised to drink enough water to help make the elimination easier and more comfortable."
+						},
+						{
+							"title": "Process",
+							"text": "Electric current flows through a set of plates in the water module that is immersed in the water in the foot bath. The foot bath water is added with sea salt, so it has the mineral concentration of water from the ocean. Water molecules are split into hydrogen and oxygen under the influence of a certain voltage. The negative ions that are released during this process neutralize the toxic free radicals in your body that help the cells rejuvenate."
+						},
+						{
+							"title": "Detox",
+							"text": "Some people may experience a slight tickling or tingling sensation of the ionic Detox foot bath in their feet. After detoxing, your body is better equipped to stop other toxins, viruses and harmful substances. The foot bath also activates the body's lymphatic system, which helps with lasting detoxification for 24 to 48 hours after a session. It is suggested that you start with a total of 10 sessions over a 3-5 week period to maximize detoxification."
+						}
+					],
+					"faqs": [
+						{
+							"question": "Who discovered BioCleanse?",
+							"answer": "Both frequency systems, discovered by the American scientist Royal Raymond Rife and the German physicist W.O. Schumann, their proven to be the effective methods for combating pathogens and stimulating the self-healing properties of the body."
+						},
+						{
+							"question": "How does it come that water colors?",
+							"answer": "The water reacts to the electrical voltage and a magnetic field. It will discolour even if you don't put your feet in it. As soon as you put your feet in, the water will reach a much more intense color, partly as a result of the toxins leaving your body. The final color of the water depends on the level of toxins in your body. However, the effect of the released energy at cell level and your bio-energetic field is much more important for the detoxification process."
+						},
+						{
+							"question": "How can BioCleanse renew my energy level?",
+							"answer": "The energy fields that the device produces balance the energy field of your body and stimulate the natural functions of your body. This process is called bio-charging. The Biocleanse unit is the only Detox foot bath that has these functions and is safe to use."
+						},
+						{
+							"question": "Can I touch the water module?",
+							"answer": "Yes, touching does not affect treatment and is in no way harmful to the body. However, we recommend that you exercise as little as possible during treatment. Allowing the water module to do its job makes it easier to find and identify the toxins"
+						},
+						{
+							"question": "How do bubbles get into the water?",
+							"answer": "They are created by the chemical reaction that splits the hydrogen and oxygen molecules."
+						},
+						{
+							"question": "When is BioCleanse effective?",
+							"answer": "By setting different settings on a number of frequencies, the Biocleanse unit can provide relief in the case of arthritis, fibromyalgia, hepatic dysfunction, pathogens, parasite relaxtion, Schuman / Rife. Biocleanse foot baths have also been proven to be effective against low energy, stress, depression, anxiety, pain, colds and flu."
+						}
+					],
+					"cta_title": "Experience it yourself",
+					"cta_text": "A session takes about 45 minutes. Bring a bottle of water."
+				}
+			},
+			{
+				"id": "page-gallery-en",
+				"slug": "inspiration",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"template": "gallery",
+					"title": "Inspiration",
+					"eyebrow": "Inspiration",
+					"hero_title": "Inside the studio",
+					"hero_text": "Take a look around our treatment rooms in Roermond.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz.jpg",
+							"alt": "Clenz studio",
+							"filename": "clenz.jpg"
+						}
+					},
+					"gallery": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-2.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-2.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-13.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-13.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-15.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-15.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-12.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-12.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-10.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-10.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-8.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-8.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-9.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-9.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-7.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-7.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-4.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-4.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-6.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-6.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-5.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-5.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-3.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-3.jpg"
+								}
+							},
+							"caption": ""
+						}
+					]
+				}
+			},
+			{
+				"id": "page-contact-en",
+				"slug": "contact",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"template": "contact",
+					"title": "Contact",
+					"eyebrow": "Contact",
+					"hero_title": "Visit us in Roermond",
+					"hero_text": "Walk in during opening hours, call us, or book online.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/podiumn.jpg",
+							"alt": "The Clenz studio",
+							"filename": "podiumn.jpg"
+						}
+					},
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k67",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k68",
+									"text": "After closing time you can call to make an appointment. During opening hours you are always welcome to walk in without an appointment.",
+									"marks": []
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-privacy-en",
+				"slug": "privacy",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"template": "legal",
+					"title": "Privacy policy",
+					"eyebrow": "Privacy",
+					"hero_title": "Privacy policy",
+					"hero_text": "",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k69",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k70",
+									"text": "The information shown here is provided for educational purposes only. The content is not intended as a substitute for medical advice or care. You should not use the information on this website to diagnose or treat a health problem, condition or disease without consulting a doctor.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k71",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k72",
+									"text": "Personal identification information",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k73",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k74",
+									"text": "We may ask for personal identification information (such as your name, address, telephone number, email address and/or any other identifier that allows physical or online contact with you) in connection with your use of our site, when you send us suggestions or questions, request products, services or additional information (including by email), and in connection with other activities, services or resources we make available on our site. In all of these cases we only collect personal identification information if you voluntarily provide it to us. Unless otherwise stated in this policy, we make reasonable efforts never to knowingly disclose personal identification information about you to a third party without your consent, except as described here or as permitted or required by law. We may contact you based on the information you provide online.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k75",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k76",
+									"text": "If you give us permission, we may also use personal identification information for internal or external marketing and promotional purposes. For example, from time to time we may send you emails introducing a product or service we think may interest you. To obtain your consent, we give you the option to sign up at the moment we ask for your personal details. If you sign up, you can choose to unsubscribe at any time. Please note that if you do not sign up, or later unsubscribe, you may not be eligible for certain benefits that require a name, email address, telephone number or other personal identification information.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k77",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k78",
+									"text": "Non-personal identification information",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k79",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k80",
+									"text": "We collect non-personal identification information through, without limitation, the following methods:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k81",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k82",
+									"text": "Cookie technology: a \"cookie\" is a piece of data that a website can send to your browser, which can then store it on your system.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k83",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k84",
+									"text": "IP address tracking: an IP address is a number assigned to your computer when you are on the internet. When you request pages from our site, our servers register your IP address.",
+									"marks": []
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-home-nl",
+				"slug": "home",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"template": "home",
+					"title": "Home",
+					"eyebrow": "Detox en massage in Roermond",
+					"hero_title": "Ontgiften. Ontspannen. Vernieuwen.",
+					"hero_text": "Een rustige studio voor het BioCleanse detox voetenbad en massage, gerund door oprichters Anja en Arthur. Clenz is ook de officiële BioCleanse distributeur voor de Benelux en Europa.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/906023.jpg",
+							"alt": "Feet splashing in clear water",
+							"filename": "906023.jpg"
+						}
+					},
+					"highlights_title": "Wat een detox voetenbad voor je kan doen",
+					"highlights": [
+						{
+							"title": "Dieper slapen, uitgerust wakker worden",
+							"text": ""
+						},
+						{
+							"title": "Meer energie gedurende de dag",
+							"text": ""
+						},
+						{
+							"title": "Ervaar minder stress en spanning",
+							"text": ""
+						},
+						{
+							"title": "Meer balans tussen verstand & gevoel",
+							"text": ""
+						},
+						{
+							"title": "Zeer behulpzaam bij darmklachten, diverse huidklachten & meer",
+							"text": ""
+						}
+					],
+					"body_title": "De Oprichters",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k85",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k86",
+									"text": "“Clenz” werd oorspronkelijk in Amsterdam opgericht door man en vrouw Arthur van Eldik en Anja Eckhoff. Arthur werd gediagnosticeerd met hepatitis C en op de rand van leverfalen met lever waarde van bijna 3500 (die tussen de 30 en 40 moet zijn). Specialisten en artsen waren sceptisch of hij dit kon overleven en stelden een type chemotherapie voor die weinig hoop op succes had. Tijdens dit proces ontdekte Anja de “Biocleanse” machine, die is ontwikkeld door een Amerikaanse wetenschapper. Wanhopig voor een alternatieve oplossing, besloten ze om de Biocleanse detox voetenbad aan te schaffen om de hepatitis C te behandelen. Het resultaat was een een lever met gezonde lage waarden! Nu hebben ze een nieuwe kliniek in Roermond geopend, zetten ze hun praktijk, met meer dan 15 jaar ervaringen in de detox- en wellness industrie, voort. Bel voor meer informatie of kom langs om te zien of we jou kunnen helpen met het ondersteunen van jouw gezondheid.",
+									"marks": []
+								}
+							]
+						}
+					],
+					"side_image": {
+						"$media": {
+							"url": "https://balitechcenter.com/images/founders.jpg",
+							"alt": "Founders Arthur van Eldik and Anja Eckhoff",
+							"filename": "founders-anja-arthur.jpg"
+						}
+					},
+					"cta_title": "Klaar om je lichter te voelen?",
+					"cta_text": "Boek in een minuut online, of loop gewoon binnen tijdens de openingstijden."
+				},
+				"translationOf": "page-home-en"
+			},
+			{
+				"id": "page-detox-nl",
+				"slug": "detox",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"template": "treatments",
+					"title": "Detox",
+					"eyebrow": "Detox",
+					"hero_title": "Verwijder giftige elementen uit je lichaam",
+					"hero_text": "Leun achterover met je voeten in warm water terwijl het BioCleanse ionische voetenbad het eigen reinigingssysteem van je lichaam ondersteunt.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/session.jpg",
+							"alt": "Detox footbath session",
+							"filename": "session.jpg"
+						}
+					},
+					"highlights_title": "Effect van de behandeling",
+					"highlights": [
+						{
+							"title": "Dieper slapen, uitgerust wakker worden",
+							"text": ""
+						},
+						{
+							"title": "Meer energie gedurende de dag",
+							"text": ""
+						},
+						{
+							"title": "Ervaar minder stress en spanning",
+							"text": ""
+						},
+						{
+							"title": "Meer balans tussen verstand & gevoel",
+							"text": ""
+						},
+						{
+							"title": "Zeer behulpzaam bij darmklachten, diverse huidklachten & meer",
+							"text": ""
+						}
+					],
+					"body_title": "Zo werkt het ionische voetenbad",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k87",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k88",
+									"text": "De module levert een elektrische stroom in het water in de voetkuip. Deze laag-niveau stroom veroorzaakt metaal in de reeks en het water en zout van het voetenbad genereert negatieve en positief geladen ionen. De negatieve ionen bewegen zich door het lichaam om zich te hechten aan giftige stoffen met een tegengestelde lading. De meeste gifstoffen in ons lichaam hebben een positieve lading, zodat ze worden geneutraliseerd en vervolgens door osmose uit het lichaam worden getrokken vanwege hun aantrekking tot het ionenveld in het spawater.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k89",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k90",
+									"text": "De BioCleanse kan cellen helpen te stabiliseren zodat fysiologische functies op een optimaal niveau kunnen werken. Dit kan helpen het immuunsysteem te herstellen. De negatieve ionen kunnen je pH verhogen naar een meer alkalisch niveau, waarvan wordt gedacht dat het helpt bij het bestrijden van vele soorten ziektes. Ook bevat uw BioCleanse-voetreiniging veel frequenties die zijn ontworpen om aan bepaalde voorwaarden te voldoen.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k91",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k92",
+									"text": "Het BioCleanse voetenbad wordt geleverd met vooraf getimede sequenties, waaronder, fibromyalgie, artritis, parasieten, pathogenen en ontspanning, die elk 31 verschillende frequenties hebben. Allen worden beschouwd als Rife Frequenties. De getimede instellingen hebben overal één frequentie en de Schumann-instelling heeft de Schumann-frequentie gedurende de hele reeks.",
+									"marks": []
+								}
+							]
+						}
+					],
+					"side_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/footbath.jpg",
+							"alt": "BioCleanse footbath",
+							"filename": "footbath.jpg"
+						}
+					},
+					"cta_title": "Begin met één sessie",
+					"cta_text": "De meeste cliënten volgen een programma van 10 sessies in 3 tot 5 weken."
+				},
+				"translationOf": "page-detox-en"
+			},
+			{
+				"id": "page-massage-nl",
+				"slug": "massage",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"template": "treatments",
+					"title": "Massage",
+					"eyebrow": "Massage",
+					"hero_title": "Geniet van het goede leven. Geniet van een massage.",
+					"hero_text": "Van ontspanning, hotstone en deep tissue tot sport-, zwangerschaps- en duomassage: elke behandeling wordt afgestemd op wat jouw lichaam vandaag nodig heeft.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/massage1.jpg",
+							"alt": "Relaxing back massage",
+							"filename": "massage1.jpg"
+						}
+					},
+					"body_title": "Massageruimte en regels",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k93",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k94",
+									"text": "De moderne Clenz studio beschikt over een degelijke massagetafels en een perfect zittende massagestoel. Voor de massage hanteren wij de volgende regels:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k95",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k96",
+									"text": "Voor iedere cliënt gebruiken wij schone handdoeken, mocht u toch liever uw eigen handdoeken gebruiken dan kan dit natuurlijk ook. Wij stellen het ook op prijs als iedere cliënt voor de massage behandeling schoon of gedouched is.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k97",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k98",
+									"text": "De praktijk is niet voor het geven van erotische massages.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k99",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k100",
+									"text": "Bent u al onder behandeling van een arts, therapeut, specialist of iets soortgelijks dan kunt u van te voren met deze arts overleggen of een massage geen problemen kan veroorzaken die uw behandeling kan verstoren.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k101",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k102",
+									"text": "Bij verhindering dient u uw afspraak MINIMAAL 12 UUR voor aanvang te annuleren. Telefoon: Anja 06-28770946 of Arthur 06-28770947. De kosten voor een niet of te laat geannuleerde afspraak worden in rekening gebracht.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k103",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k104",
+									"text": "Wanneer je er zelf een goed gevoel bij hebt, kun je gewoon gemasseerd worden als je in verwachting bent.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k105",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k106",
+									"text": "De massagepraktijk is niet aansprakelijk voor beschadiging, verlies of diefstal van persoonlijke bezittingen.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k107",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k108",
+									"text": "In onze praktijk mag niet worden gerookt.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k109",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k110",
+									"text": "Voor aanvang van uw eerste massagebehandeling stellen wij u een aantal vragen om inzicht te krijgen in uw medische en sportieve gegevens. Bij twijfel over de behandeling van een bestaande aandoening heeft de masseur het recht om de behandeling te staken en u door te verwijzen naar een arts. Wanneer uw arts er in toestemt kunt u natuurlijk alsnog een vervolgafspraak maken.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k111",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k112",
+									"text": "Eventueel gebruik van medicijnen, behandeling van een arts, therapeut of specialist dient u voor aanvang van de massage aan ons mede te delen. In een aantal gevallen is een aanpassing van de behandeling namelijk noodzakelijk.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k113",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k114",
+									"text": "Wij kunnen geen behandeling geven aan cliënten met een posttraumatische of pathologische aandoening. Hiervoor kunt u zonder afspraak terecht bij een fysiotherapeut.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						}
+					],
+					"side_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/podiumn.jpg",
+							"alt": "Treatment room at Clenz",
+							"filename": "podiumn.jpg"
+						}
+					},
+					"cta_title": "Tijd om te ontspannen",
+					"cta_text": "Kies je massage en een tijd die jou uitkomt."
+				},
+				"translationOf": "page-massage-en"
+			},
+			{
+				"id": "page-biocleanse-nl",
+				"slug": "biocleanse",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"template": "product",
+					"title": "Biocleanse",
+					"eyebrow": "Voor therapeuten en thuisgebruik",
+					"hero_title": "Het BioCleanse ionische detox voetenbad",
+					"hero_text": "Clenz is het officiële bedrijf en de distributeur van de BioCleanse detox voetenbad unit in de Benelux en Europa, voor therapeuten en privégebruik.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/kit.jpg",
+							"alt": "BioCleanse ionic detox footbath kit",
+							"filename": "kit.jpg"
+						}
+					},
+					"price_label": "BioCleanse kit €2.300, watermodule €119,95",
+					"highlights_title": "Programma-instellingen",
+					"highlights": [
+						{
+							"title": "Artritis",
+							"text": ""
+						},
+						{
+							"title": "Fibromyalgie",
+							"text": ""
+						},
+						{
+							"title": "Pathogenen",
+							"text": ""
+						},
+						{
+							"title": "Parasieten",
+							"text": ""
+						},
+						{
+							"title": "Schumann",
+							"text": ""
+						},
+						{
+							"title": "Ontspanning",
+							"text": ""
+						}
+					],
+					"body_title": "Over BioCleanse",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k141",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k142",
+									"text": "Het BioCleanse Ionic Detox-voetenbad kan worden gebruikt voor therapeuten, personal trainers, prive , spa’s en klinieken voor ontgifting routines. BioCleanse Ionic-voetenbaden worden al vele jaren door veel mensen gebruikt als onderdeel van hun ontgiftingsroutine. Enkele van de gemelde ervaringen omvatten een groter gevoel van welzijn, verbeterde slaap, verhoogde vitaliteit, pijn en stressverlichting en symptomatische verlichting van gezwollen en pijnlijke gewrichten. Een voetenbad sessie is een externe methode die kan helpen bij het ontgiften en elimineren van natuurlijk afval. De Bio Cleanse unit instellingen zijn: artritis, fibromyalgie, pathogenen, parasieten, Schumann en ontspanning. U ontvangt Rife- frequenties tegelijkertijd en profiteert van de Bio Cleanse lading en Ionisatie.",
+									"marks": []
+								}
+							]
+						}
+					],
+					"side_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/footbath.jpg",
+							"alt": "BioCleanse footbath in use",
+							"filename": "footbath.jpg"
+						}
+					},
+					"faqs": [
+						{
+							"question": "Hoe werkt het?",
+							"answer": "De module levert een elektrische stroom in het water in de voetkuip. Deze laag-niveau stroom veroorzaakt metaal in de reeks en het water en zout van het voetenbad genereert negatieve en positief geladen ionen. De negatieve ionen bewegen zich door het lichaam om zich te hechten aan giftige stoffen met een tegengestelde lading. De meeste gifstoffen in ons lichaam hebben een positieve lading, zodat ze worden geneutraliseerd en vervolgens door osmose uit het lichaam worden getrokken vanwege hun aantrekking tot het ionenveld in het spawater.\n\nDe BioCleanse kan cellen helpen te stabiliseren zodat fysiologische functies op een optimaal niveau kunnen werken. Dit kan helpen het immuunsysteem te herstellen. De negatieve ionen kunnen je pH verhogen naar een meer alkalisch niveau, waarvan wordt gedacht dat het helpt bij het bestrijden van vele soorten ziektes. Ook bevat uw BioCleanse-voetreiniging veel frequenties die zijn ontworpen om aan bepaalde voorwaarden te voldoen.\n\nHet BioCleanse voetenbad wordt geleverd met vooraf getimede sequenties, waaronder kanker, fibromyalgie, artritis, parasieten, pathogenen en ontspanning, die elk 31 verschillende frequenties hebben. Allen worden beschouwd als Rife Frequenties. De getimede instellingen hebben overal één frequentie en de Schumann-instelling heeft de Schumann-frequentie gedurende de hele reeks."
+						},
+						{
+							"question": "Specificatie",
+							"answer": "Input: 110/220 V teruggetreden naar 24V met een adapter (meegeleverd)\n \nNetsnoer: Noord-Amerikaans of elk type zoals vereist (ze zijn uitwisselbaar)\n \nUitgang: 24V of ongeveer 5 Ampère. We hebben een stroombegrenzer inline om de output te verlagen tot maximaal 2,4 ampère.\n \nWatermodule: twee meegeleverd. Elk levert 90 - 100 30 minuten. sessies\n \nGarantie: 5 jaar voor de unit, 2 jaar voor de voeding en 30 dagen voor de module. Garantie is niet overdraagbaar."
+						},
+						{
+							"question": "Wat is inbegrepen?",
+							"answer": "Hoofdbesturingseenheid\n \nNetsnoer - Een uiteinde met een stekker voor uw adapter, het andere uiteinde met een stekker voor uw stopcontact.\n \nAdapter - Het zwarte, rechthoekige, zware apparaat met één snoer om op het stopcontact aan de achterkant van uw hoofdbesturingseenheid aan te sluiten. De adapter converteert uw wisselstroom naar een gelijkstroom van 24V, zodat de hoofdbesturingseenheid naar behoren functioneert.\n \nWater Modules - Twee inbegrepen. Dit zijn de onderdompelbare eenheden die zijn uitgerust met een RCA-stekker om aan te sluiten op een van de twee RCA-aansluitingen aan de voorkant van uw hoofdbesturingseenheid."
+						},
+						{
+							"question": "Gebruik",
+							"answer": "Drink dagelijks 6 tot 8 glazen water tijdens uw behandeling sessies en tot één week na uw sessies. Uw reinigings sessies verdelen beschadigde cellen in uw lichaam en het water dat u drink zal deze cellen, andere gifstoffen en zware metalen uit uw lichaam spoelen.\n\nHet wordt aanbevolen om uw BioCleanse-machine slechts om de andere dag te gebruiken voor slechts 20 - 40 minuten en alleen voor een maximum van twee weken tegelijkertijd. Na de twee weken durende sessies moet je een week nemen zonder enige BioCleanse-sessies, zodat je lichaamscellen kunnen verjongen. Je hebt net een rigoureuze verandering in de cellen van je lichaam voltooid die nog steeds uit je lichaam zal wegspoelen. Zorg er tijdens de \"off\" -week voor dat je ook veel water drinkt, omdat je lichaam nog steeds ontgift."
+						},
+						{
+							"question": "Disclaimers",
+							"answer": "De BioCleanse-machine is een experimenteel therapeutisch apparaat. Het is raadzaam om uw erkende vertegenwoordiger of gezondheidsdeskundige te raadplegen voordat u deze apparatuur gebruikt. Houd er rekening mee dat u alle risico's accepteert die gepaard gaan met het gebruik van de BioCleanse-machine. Bekijk zorgvuldig alle instructies die bij deze apparatuur zijn meegeleverd voordat u aan een BioCleanse-sessie begint. Deze beschrijving is alleen bedoeld voor algemene informatie en educatieve doeleinden. De hierin vervatte informatie is niet geëvalueerd door de FDA en is niet bedoeld om te genezen, ziekte te voorkomen, of voor te schrijven of te gebruiken voor de diagnose."
+						},
+						{
+							"question": "Retourbeleid",
+							"answer": "Het product kan binnen 30 dagen na ontvangst worden geretourneerd. Er geldt een toeslag van 5% voor restock. Verzendkosten worden niet geretourneerd. Modules / arrays kunnen niet worden geretourneerd en de retail kosten van de arrays worden van het terugbetalingsbedrag afgetrokken. De klant moet het apparaat terugsturen op kosten van de klant. Het apparaat moet in perfecte staat zijn zonder krassen of defecten, in de originele doos met alle papierwerk en accessoires. Extra kosten ontstaan als het apparaat met schade wordt teruggestuurd of niet in de originele verpakking met papierwerk. Na 30 dagen zijn retouren niet toegestaan. Moet uiterlijk 30 dagen na de datum van ontvangst worden afgestempeld. Alvorens terug te keren, moet de klant bellen voor een RMA #."
+						}
+					],
+					"cta_title": "Interesse in je eigen BioCleanse?",
+					"cta_text": "Bel of mail ons voor advies, een demonstratie of een bestelling."
+				},
+				"translationOf": "page-biocleanse-en"
+			},
+			{
+				"id": "page-how-it-works-nl",
+				"slug": "how-it-works",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"template": "info",
+					"title": "Hoe het werkt",
+					"eyebrow": "De wetenschap",
+					"hero_title": "Zo werkt het detox voetenbad",
+					"hero_text": "Wat er gebeurt tijdens een sessie, waarom het water verkleurt en hoe je het meeste uit je programma haalt.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/clenz-3.jpg",
+							"alt": "Detox footbath basins",
+							"filename": "clenz-3.jpg"
+						}
+					},
+					"highlights_title": "Stap voor stap",
+					"highlights": [
+						{
+							"title": "Functie",
+							"text": "Ontgiften van je lichaam vindt grotendeels plaats via je huid, zonder je longen mee te tellen. Omdat ons lichaam tot 80% water bevat, heeft het alleen zin dat water een grote rol speelt in dit proces. Het Detox-voetenbad functioneert door de cellen te activeren en Uw metabolisme te verbeteren Alle organen onschadelijk te maken en al deze helpen het lichaam bij het herstellen van de gezondheid, het verbeteren van de immuniteit en het uitroeien van ziekteverwekkers ... dit resulteert in een vernieuwing van lichaam en geest."
+						},
+						{
+							"title": "Procedure",
+							"text": "U dompelt uw voeten in een voetenbad met warm water. De biocleanse detox voetenbad unit is ingesteld op de juiste tijdinstellingen en ionisatieniveaus. Daarna leun je achterover en ontspan je 45 minuten terwijl de biocleanse voetenbad begint U gifstoffen uit het hele lichaam te trekken, inclusief de nieren en de lever, het stimuleert om hun vermogen om je lichaam te ontgiften en te verbeteren. Klanten worden geadviseerd om genoeg water te drinken om te helpen de eliminatie gemakkelijker en comfortabeler te maken."
+						},
+						{
+							"title": "Proces",
+							"text": "Elektrische stroom loopt door een set platen in de watermodule die is ondergedompeld in het water in de voetenbad. Het voetbadwater toegevoegd met zeezout, dus het heeft de minerale concentratie van water uit de oceaan. Watermoleculen worden gesplitst in waterstof en zuurstof onder invloed van een bepaalde spanning. De negatieve ionen die vrijkomen tijdens dit proces neutraliseren de toxische vrije radicalen in je lichaam die de cellen helpen te verjongen."
+						},
+						{
+							"title": "Detox",
+							"text": "Sommige mensen kunnen een licht kietelend of tintelend gevoel van het ionische Detox-voetenbad in hun voeten ervaren. Na het ontgiften is je lichaam beter uitgerust om andere gifstoffen, virussen en schadelijke stoffen tegen te houden. Het voetenbad activeert ook het lymfestelsel van het lichaam, wat helpt bij blijvende ontgifting tot 24 tot 48 uur na een sessie. Er wordt gesuggereerd dat u begint met in totaal 10 sessies over een periode van 3-5 weken om ontgifting te maximaliseren."
+						}
+					],
+					"faqs": [
+						{
+							"question": "Wie heeft de BioCleanse ontdekt?",
+							"answer": "Beide frequentiesystemen, ontdekt door de Amerikaanse wetenschapper Royal Raymond Rife en de Duitse natuurkundige W.O. Schumann, hun bewezen dat de effectieve methoden voor het bestrijden van ziekteverwekkers en het stimuleren van de zelfherstellende eigenschappen van het lichaam."
+						},
+						{
+							"question": "Hoe komt het dat water verkleurt?",
+							"answer": "Het water reageert op de elektrische spanning en een magnetisch veld. Het zal verkleuren, zelfs als je er niet je voeten in zet. Zodra je voeten in doet, zal het water een veel intensere kleur bereiken, gedeeltelijk als gevolg van de toxines die je lichaam verlaten. De uiteindelijke kleur van het water is afhankelijk van het niveau van de gifstoffen in je lichaam. Het effect van de vrijgekomen energie op celniveau en uw bio-energetische veld is echter veel belangrijker voor het ontgiftingsproces."
+						},
+						{
+							"question": "Hoe kan BioCleanse mijn energieniveau vernieuwen?",
+							"answer": "De energievelden die het apparaat produceert, balanceren het energieveld van je lichaam en stimuleren de natuurlijke functies van je lichaam. Dit proces wordt bio-opladen genoemd. De Biocleanse unit is het enige Detox voetenbad dat deze functies heeft en veilig is om te gebruiken."
+						},
+						{
+							"question": "Kan ik de watermodule aanraken?",
+							"answer": "Ja, aanraken heeft geen invloed op de behandeling en is op geen enkele wijze schadelijk voor het lichaam. We raden u echter aan zo weinig mogelijk te bewegen tijdens de behandeling. Door de water module zijn werk te laten doen, wordt het gemakkelijker om de gifstoffen te vinden en te identificeren"
+						},
+						{
+							"question": "Hoe komen er bubbels in het water?",
+							"answer": "Ze worden gecreëerd door de chemische reactie die de waterstof- en zuurstofmoleculen splitst."
+						},
+						{
+							"question": "Wanneer is BioCleanse effectief?",
+							"answer": "De Biocleanse unit kan, door verschillende instellingen op een aantal frequenties in te stellen, verlichting bieden bij artritis, fibromyalgie, leverfunctiestoornissen, pathogenen, parasieten relaxtion, Schuman/Rife. Voetbaden van Biocleanse zijn ook bewezen effectief te zijn tegen weinig energie, stress, depressie, angst, pijn, verkoudheid en griep."
+						}
+					],
+					"cta_title": "Ervaar het zelf",
+					"cta_text": "Een sessie duurt ongeveer 45 minuten. Neem een fles water mee."
+				},
+				"translationOf": "page-how-it-works-en"
+			},
+			{
+				"id": "page-gallery-nl",
+				"slug": "inspiration",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"template": "gallery",
+					"title": "Inspiratie",
+					"eyebrow": "Inspiratie",
+					"hero_title": "Een kijkje in de studio",
+					"hero_text": "Kijk rond in onze behandelruimtes in Roermond.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz.jpg",
+							"alt": "Clenz studio",
+							"filename": "clenz.jpg"
+						}
+					},
+					"gallery": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-2.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-2.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-13.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-13.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-15.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-15.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-12.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-12.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-10.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-10.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-8.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-8.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-9.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-9.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-7.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-7.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-4.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-4.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-6.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-6.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-5.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-5.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-3.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-3.jpg"
+								}
+							},
+							"caption": ""
+						}
+					]
+				},
+				"translationOf": "page-gallery-en"
+			},
+			{
+				"id": "page-contact-nl",
+				"slug": "contact",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"template": "contact",
+					"title": "Contact",
+					"eyebrow": "Contact",
+					"hero_title": "Bezoek ons in Roermond",
+					"hero_text": "Loop binnen tijdens de openingstijden, bel ons of boek online.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/podiumn.jpg",
+							"alt": "The Clenz studio",
+							"filename": "podiumn.jpg"
+						}
+					},
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k155",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k156",
+									"text": "Na sluitingstijd kan je bellen om een afspraak te maken. Tijdens de openingstijden kan je altijd langskomen zonder afspraak.",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"translationOf": "page-contact-en"
+			},
+			{
+				"id": "page-privacy-nl",
+				"slug": "privacy",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"template": "legal",
+					"title": "Privacybeleid",
+					"eyebrow": "Privacy",
+					"hero_title": "Privacybeleid",
+					"hero_text": "",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k157",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k158",
+									"text": "De informatie die hier wordt weergegeven, wordt alleen voor educatieve doeleinden aangeboden. De inhoud is niet bedoeld als vervanging of vervanging, medisch advies of zorg. U mag de informatie op deze website niet gebruiken om een gezondheidsprobleem, aandoening of ziekte te diagnosticeren of behandelen zonder een arts te raadplegen.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k159",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k160",
+									"text": "Persoonlijke identificatie-informatie",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k161",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k162",
+									"text": "We kunnen persoonlijke identificatie-informatie van u vragen (zoals uw naam, adres, telefoonnummer, creditcardnummer, e-mailadres en / of elke andere identificator die het fysieke of online contact met u mogelijk maakt) in verband met uw gebruik van , of deelname aan, lidmaatschapsregistratie voor suggesties, uw vragen, bezoekersverzoeken voor gratis producten of diensten of aanvullende informatie (inclusief via e-mail aan ons) en in verband met andere activiteiten, services of bronnen die we beschikbaar stellen op onze Site. In al deze gevallen zullen wij persoonlijke identificatie-informatie alleen van u verzamelen als u vrijwillig dergelijke informatie aan ons verstrekt. Tenzij anders bepaald in dit beleid, streven wij er redelijkerwijs naar om ervoor te zorgen dat we nooit opzettelijk persoonlijke identificatiegegevens over u als individuele gebruiker bekendmaken aan een derde partij zonder uw toestemming te hebben verkregen (door middel van opt-in of soortgelijke procedures), behalve zoals hierin bepaald of anderszins zoals toegestaan of vereist door de wet. Verder kunnen we contact met u opnemen op basis van de informatie die u online verstrekt, hetzij in verband met uw registratie, hetzij op plaatsen zoals de hierboven beschreven forums.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k163",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k164",
+									"text": "Als u ons toestemming geeft, kunnen we ook persoonlijke identificatie-informatie gebruiken voor interne of externe marketing- en promotiedoeleinden. Zo nu en dan kunnen we u bijvoorbeeld e-mails sturen om een product of dienst te introduceren waarvan wij denken dat ze van belang kunnen zijn voor de gebruikers van onze Site. Om uw toestemming te krijgen om u deze informatie toe te sturen, bieden wij u de mogelijkheid om u aan te melden op het moment dat ons verzoek om uw persoonlijke gegevens wordt gedaan. Als u zich aanmeldt, kunt u op elk gewenst moment ervoor kiezen om u af te melden, zelfs nadat u persoonlijke informatie hebt verstrekt, door de procedures te volgen die hieronder worden beschreven aan het einde van dit privacybeleid. Houd er echter rekening mee dat u in bepaalde omstandigheden, als u er in eerste instantie niet voor kiest zich aan te melden of als u zich later afmeldt, mogelijk niet in aanmerking komt voor bepaalde voordelen waarvoor een naam, e-mailadres, telefoonnummer of andere persoonlijke identificatie-informatie nodig is.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k165",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k166",
+									"text": "Niet-persoonlijke identificatie-informatie",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k167",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k168",
+									"text": "We verzamelen niet-persoonlijke identificatie-informatie door middel van, zonder beperking, de volgende soorten methodologie:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k169",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k170",
+									"text": "Cookie-technologie: een \"cookie\" is een gegevenselement dat een website naar uw browser kan sturen, die het vervolgens op uw systeem kan opslaan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k171",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k172",
+									"text": "IP-adres tracking: een IP-adres is een nummer dat aan uw computer is toegewezen wanneer u op internet bent.",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"translationOf": "page-privacy-en"
+			},
+			{
+				"id": "page-home-de",
+				"slug": "home",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"template": "home",
+					"title": "Startseite",
+					"eyebrow": "Detox und Massage in Roermond",
+					"hero_title": "Entgiften. Entspannen. Erneuern.",
+					"hero_text": "Ein ruhiges Studio für das BioCleanse Detox-Fußbad und Massage, geführt von den Gründern Anja und Arthur. Clenz ist außerdem offizieller BioCleanse-Vertriebspartner für die Benelux-Länder und Europa.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/906023.jpg",
+							"alt": "Feet splashing in clear water",
+							"filename": "906023.jpg"
+						}
+					},
+					"highlights_title": "Was ein Detox-Fußbad für Sie tun kann",
+					"highlights": [
+						{
+							"title": "Tiefer schlafen, ausgeruht aufwachen",
+							"text": ""
+						},
+						{
+							"title": "Mehr Energie während des Tages",
+							"text": ""
+						},
+						{
+							"title": "Erleben Sie weniger Stress und Anspannung",
+							"text": ""
+						},
+						{
+							"title": "Mehr Balance zwischen Verstand und Gefühl.",
+							"text": ""
+						},
+						{
+							"title": "Sehr hilfreich bei Darmbeschwerden, verschiedenen Hautbeschwerden & mehr",
+							"text": ""
+						}
+					],
+					"body_title": "Die Gründer",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k173",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k174",
+									"text": "“Clenz” wurde ursprünglich in Amsterdam von den Eheleuten Arthur van Eldik und Anja Eckhoff gegründet. Bei Arthur wurde eine Hepatitis C diagnostiziert, die bei einem Leberwert von nahezu 3500, (normalerwiese beträgt er 30 bis 40) fast zum Leberversagens führte. Fachärzte und Ärzte waren skeptisch, ob er dies überleben konnte, b schlugen eine Art Chemotherapie vor, die wenig Hoffnung auf Erfolg hatte. Gleichzeitig entdeckte Anja die “Biocleanse” -Maschine eines amerikanischen Wissenschaftlers. Auf der Suche nach einer alternativen Lösung entschieden sie sich für das Biocleanse Detox-Fußbad, probierten es aus und erzielten gute Ergebnisse. Mit der Eröffnung eines neuen Instituts in Roermond setzen sie ihre praktischen Erfahrung von mehr als 15 Jahren in der Entgiftungs- und Wellnessbranche fort.",
+									"marks": []
+								}
+							]
+						}
+					],
+					"side_image": {
+						"$media": {
+							"url": "https://balitechcenter.com/images/founders.jpg",
+							"alt": "Founders Arthur van Eldik and Anja Eckhoff",
+							"filename": "founders-anja-arthur.jpg"
+						}
+					},
+					"cta_title": "Bereit, sich leichter zu fühlen?",
+					"cta_text": "In einer Minute online buchen oder während der Öffnungszeiten einfach vorbeikommen."
+				},
+				"translationOf": "page-home-en"
+			},
+			{
+				"id": "page-detox-de",
+				"slug": "detox",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"template": "treatments",
+					"title": "Detox",
+					"eyebrow": "Detox",
+					"hero_title": "Entfernen Sie giftige Elemente aus Ihrem Körper",
+					"hero_text": "Lehnen Sie sich mit den Füßen in warmem Wasser zurück, während das BioCleanse Ionen-Fußbad das körpereigene Reinigungssystem unterstützt.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/session.jpg",
+							"alt": "Detox footbath session",
+							"filename": "session.jpg"
+						}
+					},
+					"highlights_title": "Wirkung der Behandlung",
+					"highlights": [
+						{
+							"title": "Tiefer schlafen, ausgeruht aufwachen",
+							"text": ""
+						},
+						{
+							"title": "Mehr Energie während des Tages",
+							"text": ""
+						},
+						{
+							"title": "Erleben Sie weniger Stress und Anspannung",
+							"text": ""
+						},
+						{
+							"title": "Mehr Balance zwischen Sinn und Gefühl",
+							"text": ""
+						},
+						{
+							"title": "Sehr hilfreich bei Darmbeschwerden, verschiedenen Hautbeschwerden & mehr",
+							"text": ""
+						}
+					],
+					"body_title": "So funktioniert das Ionen-Fußbad",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k175",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k176",
+									"text": "Das Modul versorgt das Wasser im Fußraum mit elektrischem Strom. Dieser niedrige Strom produziert Metall in der Reihe und das Wasser und Salz aus dem Fußbad erzeugt negative und positiv geladene Ionen. Die negativen Ionen wandern durch den Körper und binden sich an giftige Substanzen mit entgegengesetzter Ladung. Die meisten Giftstoffe in unserem Körper sind positiv geladen, sodass sie neutralisiert und dann durch Osmose aus dem Körper herausgezogen werden, da sie das Ionenfeld im Thermalwasser anziehen. Die BioCleanse kann Zellen dabei unterstützen, sich zu stabilisieren, sodass physiologische Funktionen auf einem optimalen Niveau arbeiten können. Dies kann helfen, das Immunsystem wiederherzustellen. Die negativen Ionen können Ihren pH-Wert auf ein alkalischeres Niveau anheben, von dem angenommen wird, dass es bei der Bekämpfung vieler Arten von Krankheiten hilft. Ihre BioCleanse-Fußreinigung enthält auch viele Frequenzen, die für bestimmte Bedingungen entwickelt wurden. Das BioCleanse-Fußbad ist mit vorab festgelegten Sequenzen ausgestattet, darunter Fibromyalgie, Arthritis, Parasiten, Krankheitserreger und Entspannung mit jeweils 31 verschiedenen Frequenzen. Alle gelten als häufige Häufigkeiten. Die zeitgesteuerten Einstellungen haben überall eine Frequenz und die Schumann-Einstellung hat die Schumann-Frequenz in der gesamten Serie.",
+									"marks": []
+								}
+							]
+						}
+					],
+					"side_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/footbath.jpg",
+							"alt": "BioCleanse footbath",
+							"filename": "footbath.jpg"
+						}
+					},
+					"cta_title": "Beginnen Sie mit einer Sitzung",
+					"cta_text": "Die meisten Kunden folgen einem Programm von 10 Sitzungen in 3 bis 5 Wochen."
+				},
+				"translationOf": "page-detox-en"
+			},
+			{
+				"id": "page-massage-de",
+				"slug": "massage",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"template": "treatments",
+					"title": "Massage",
+					"eyebrow": "Massage",
+					"hero_title": "Genießen Sie das gute Leben. Gönnen Sie sich eine Massage.",
+					"hero_text": "Von Entspannung, Hot Stone und Tiefengewebe bis Sport-, Schwangerschafts- und Duo-Massage: Jede Behandlung wird auf das abgestimmt, was Ihr Körper heute braucht.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/massage1.jpg",
+							"alt": "Relaxing back massage",
+							"filename": "massage1.jpg"
+						}
+					},
+					"body_title": "Massageraum und Regeln",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k177",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k178",
+									"text": "Das moderne Clenz-Studio verfügt über solide Massageliegen und einen perfekt sitzenden Massagestuhl. Für die Massage wenden wir folgende Regeln an:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k179",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k180",
+									"text": "Wir verwenden für jeden Kunden saubere Handtücher. Wenn Sie es vorziehen, Ihre eigenen zu verwenden, ist dies natürlich auch möglich. Wir wissen es auch zu schätzen, wenn jeder Kunde vor der Massage gereinigt oder geduscht wird.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k181",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k182",
+									"text": "Die Praxis ist nicht für erotische Massagen.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k183",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k184",
+									"text": "Wenn Sie bereits von einem Arzt, Therapeuten, Spezialisten oder Ähnlichem behandelt werden, können Sie sich vorab mit diesem Arzt beraten lassen, ob eine Massage Probleme verursachen kann, die Ihre Behandlung stören können.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k185",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k186",
+									"text": "Wenn Sie nicht teilnehmen können, müssen Sie Ihren Termin mindestens 12 Stunden vor dem Start absagen. Telefon: Anja 06-28770946 oder Arthur 06-28770947. Die Kosten für einen nicht oder zu spät abgesagten Termin werden in Rechnung gestellt.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k187",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k188",
+									"text": "Wenn Sie selbst ein gutes Gefühl dafür haben, können Sie sich einfach massieren lassen, wenn Sie schwanger sind.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k189",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k190",
+									"text": "Die Massagepraxis haftet nicht für Beschädigung, Verlust oder Diebstahl von persönlichen Gegenständen.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k191",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k192",
+									"text": "Rauchen ist in unserer Praxis nicht gestattet.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k193",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k194",
+									"text": "Vor Beginn Ihrer ersten Massagebehandlung stellen wir Ihnen eine Reihe von Fragen, um einen Einblick in Ihre medizinischen und sportlichen Daten zu erhalten. Wenn Zweifel an der Behandlung einer bestehenden Erkrankung bestehen, hat der Masseur das Recht, die Behandlung abzubrechen und Sie an einen Arzt zu verweisen. Wenn Ihr Arzt einverstanden ist, können Sie natürlich einen Folgetermin vereinbaren.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k195",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k196",
+									"text": "Sie müssen uns vor Beginn der Massage über die Verwendung von Medikamenten, die Behandlung durch einen Arzt, Therapeuten oder Spezialisten informieren. In einigen Fällen ist eine Anpassung der Behandlung erforderlich.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "k197",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k198",
+									"text": "Wir können Klienten mit einem posttraumatischen oder pathologischen Zustand nicht behandeln. Hierfür können Sie ohne Termin einen Physiotherapeuten aufsuchen.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						}
+					],
+					"side_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/podiumn.jpg",
+							"alt": "Treatment room at Clenz",
+							"filename": "podiumn.jpg"
+						}
+					},
+					"cta_title": "Zeit zum Abschalten",
+					"cta_text": "Wählen Sie Ihre Massage und eine passende Zeit."
+				},
+				"translationOf": "page-massage-en"
+			},
+			{
+				"id": "page-biocleanse-de",
+				"slug": "biocleanse",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"template": "product",
+					"title": "Biocleanse",
+					"eyebrow": "Für Therapeuten und zu Hause",
+					"hero_title": "Das BioCleanse Ionen-Detox-Fußbad",
+					"hero_text": "Clenz ist das offizielle Unternehmen und der Vertriebspartner des BioCleanse Detox-Fußbads in den Benelux-Ländern und Europa, für Therapeuten und den privaten Gebrauch.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/kit.jpg",
+							"alt": "BioCleanse ionic detox footbath kit",
+							"filename": "kit.jpg"
+						}
+					},
+					"price_label": "BioCleanse Kit 2.300 €, Wassermodul 119,95 €",
+					"highlights_title": "Programmeinstellungen",
+					"highlights": [
+						{
+							"title": "Arthritis",
+							"text": ""
+						},
+						{
+							"title": "Fibromyalgie",
+							"text": ""
+						},
+						{
+							"title": "Krankheitserreger",
+							"text": ""
+						},
+						{
+							"title": "Parasiten",
+							"text": ""
+						},
+						{
+							"title": "Schumann",
+							"text": ""
+						},
+						{
+							"title": "Entspannung",
+							"text": ""
+						}
+					],
+					"body_title": "Über BioCleanse",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k225",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k226",
+									"text": "Das BioCleanse Ionic Detox-Fußbad kann für Therapeuten, Personal Trainer, Privatkliniken, Spas und Entgiftungskliniken verwendet werden. BioCleanse Ionische Fußbäder werden von vielen Menschen seit vielen Jahren im Rahmen ihrer Entgiftungsroutine verwendet. Einige der gemeldeten Erfahrungen beinhalten ein besseres Wohlbefinden, verbesserten Schlaf, gesteigerte Vitalität, Schmerz- und Stressabbau sowie eine symptomatische Linderung von geschwollenen und schmerzhaften Gelenken. Ein Fußbad ist eine externe Methode, die bei der Entgiftung und Beseitigung von natürlichen Abfällen helfen kann. Die Einstellungen der Bio Cleanse-Einheit sind: Arthritis, Fibromyalgie, Krankheitserreger, Parasiten, Schumann und Entspannung. Sie erhalten gleichzeitig Rife-Frequenzen und profitieren von der Bio Cleanse-Ladung und der Ionisierung.",
+									"marks": []
+								}
+							]
+						}
+					],
+					"side_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/footbath.jpg",
+							"alt": "BioCleanse footbath in use",
+							"filename": "footbath.jpg"
+						}
+					},
+					"faqs": [
+						{
+							"question": "Wie funktioniert das?",
+							"answer": "Das Modul versorgt das Wasser im Fußraum mit elektrischem Strom. Dieser niedrige Strom produziert Metall in der Reihe und das Wasser und Salz aus dem Fußbad erzeugt negative und positiv geladene Ionen. Die negativen Ionen wandern durch den Körper und binden sich an giftige Substanzen mit entgegengesetzter Ladung. Die meisten Giftstoffe in unserem Körper sind positiv geladen, sodass sie neutralisiert und dann durch Osmose aus dem Körper herausgezogen werden, da sie das Ionenfeld im Thermalwasser anziehen. Die BioCleanse kann Zellen dabei unterstützen, sich zu stabilisieren, sodass physiologische Funktionen auf einem optimalen Niveau arbeiten können. Dies kann helfen, das Immunsystem wiederherzustellen. Die negativen Ionen können Ihren pH-Wert auf ein alkalischeres Niveau anheben, von dem angenommen wird, dass es bei der Bekämpfung vieler Arten von Krankheiten hilft. Ihre BioCleanse-Fußreinigung enthält auch viele Frequenzen, die für bestimmte Bedingungen entwickelt wurden. Das BioCleanse-Fußbad bietet zeitgesteuerte Sequenzen, darunter Krebs, Fibromyalgie, Arthritis, Parasiten, Krankheitserreger und Entspannung, mit jeweils 31 verschiedenen Frequenzen. Alle gelten als häufige Häufigkeiten. Die zeitgesteuerten Einstellungen haben überall eine Frequenz und die Schumann-Einstellung hat die Schumann-Frequenz in der gesamten Serie."
+						},
+						{
+							"question": "Spezifikation",
+							"answer": "Eingang: 110/220 V mit einem Adapter auf 24 V zurückgeführt (im Lieferumfang enthalten)\n \nNetzkabel: Nordamerikanisch oder ein beliebiger Typ (austauschbar)\n \nAusgang: 24 V oder ungefähr 5 Ampere. Wir haben einen Strombegrenzer eingebaut, um die Leistung auf maximal 2,4 Ampere zu reduzieren.\n \nWassermodul: zwei enthalten. Jeder liefert 90 - 100 für 30 Minuten. Sitzungen\n \nGarantie: 5 Jahre für das Gerät, 2 Jahre für die Stromversorgung und 30 Tage für das Modul. Garantie ist nicht übertragbar."
+						},
+						{
+							"question": "Was ist enthalten?",
+							"answer": "Hauptsteuereinheit\n \nNetzkabel - Ein Ende mit einem Stecker für Ihren Adapter, das andere Ende mit einem Stecker für Ihre Steckdose.\n \nAdapter - Das schwarze, rechteckige Hochleistungsgerät mit einem Kabel zum Anschließen an die Steckdose auf der Rückseite Ihrer Hauptsteuereinheit. Der Adapter wandelt Ihren Wechselstrom in einen 24-V-Gleichstrom um, damit das Hauptsteuergerät ordnungsgemäß funktioniert.\n \nWassermodule - Zwei enthalten. Dies sind die Taucheinheiten, die mit einem Cinch-Stecker zum Anschluss an einen der beiden Cinch-Anschlüsse an der Vorderseite Ihrer Hauptsteuereinheit ausgestattet sind."
+						},
+						{
+							"question": "Verwendung",
+							"answer": "Trinken Sie während der Behandlung und bis zu einer Woche nach den Behandlungen täglich 6 bis 8 Gläser Wasser. Ihre Reinigungssitzungen verteilen beschädigte Zellen in Ihrem Körper und das Wasser, das Sie trinken, spült diese Zellen, andere Toxine und Schwermetalle aus Ihrem Körper. Es wird empfohlen, dass Sie Ihr BioCleanse-Gerät nur jeden zweiten Tag für nur 20 - 40 Minuten und jeweils nur für maximal zwei Wochen verwenden. Nach den zweiwöchigen Sitzungen müssen Sie eine Woche ohne BioCleanse-Sitzungen einnehmen, damit sich Ihre Körperzellen verjüngen können. Sie haben gerade eine strenge Veränderung in den Zellen Ihres Körpers vollzogen, die sich immer noch von Ihrem Körper abwaschen wird. Stellen Sie sicher, dass Sie während der \"off\" Woche viel Wasser trinken, da Ihr Körper immer noch entgiftet."
+						},
+						{
+							"question": "Haftungsausschluss",
+							"answer": "Das BioCleanse-Gerät ist ein experimentelles therapeutisches Gerät. Es ist ratsam, vor der Verwendung dieses Geräts Ihren autorisierten Vertreter oder Angehörigen der Gesundheitsberufe zu konsultieren. Bitte beachten Sie, dass Sie alle mit der Verwendung des BioCleanse-Geräts verbundenen Risiken akzeptieren. Lesen Sie alle mit diesem Gerät gelieferten Anweisungen sorgfältig durch, bevor Sie mit einer BioCleanse-Sitzung beginnen. Diese Beschreibung dient nur zu allgemeinen Informations- und Bildungszwecken. Die hierin enthaltenen Informationen wurden von der FDA nicht bewertet und dienen nicht der Heilung, Vorbeugung von Krankheiten oder der Verschreibung oder Verwendung für Diagnosezwecke."
+						},
+						{
+							"question": "Rückgaberecht",
+							"answer": "Das Produkt kann innerhalb von 30 Tagen nach Erhalt zurückgegeben werden. Für die Wiederauffüllung wird ein Aufschlag von 5% erhoben. Versandkosten werden nicht zurückerstattet. Module / Arrays können nicht zurückgegeben werden und die Einzelhandelskosten der Arrays werden vom Erstattungsbetrag abgezogen. Der Kunde muss das Gerät auf Kosten des Kunden zurücksenden. Das Gerät muss sich in einwandfreiem Zustand ohne Kratzer oder Mängel in der Originalverpackung mit allen Papieren und Zubehörteilen befinden. Zusätzliche Kosten entstehen, wenn das Gerät beschädigt oder nicht in der Originalverpackung mit Papieren zurückgesandt wird. Rücksendungen sind nach 30 Tagen nicht mehr gestattet. Muss spätestens 30 Tage nach dem Datum des Eingangs abgestempelt werden. Vor der Rücksendung muss der Kunde eine RMA-Nummer anfordern."
+						}
+					],
+					"cta_title": "Interesse an Ihrem eigenen BioCleanse?",
+					"cta_text": "Rufen Sie uns an oder schreiben Sie uns für Beratung, eine Vorführung oder eine Bestellung."
+				},
+				"translationOf": "page-biocleanse-en"
+			},
+			{
+				"id": "page-how-it-works-de",
+				"slug": "how-it-works",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"template": "info",
+					"title": "So funktioniert es",
+					"eyebrow": "Die Wissenschaft",
+					"hero_title": "So funktioniert das Detox-Fußbad",
+					"hero_text": "Was während einer Sitzung passiert, warum sich das Wasser verfärbt und wie Sie das Beste aus Ihrem Programm herausholen.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/clenz-3.jpg",
+							"alt": "Detox footbath basins",
+							"filename": "clenz-3.jpg"
+						}
+					},
+					"highlights_title": "Schritt für Schritt",
+					"highlights": [
+						{
+							"title": "Funktion",
+							"text": "Die Entgiftung Ihres Körpers erfolgt größtenteils durch Ihre Haut, ohne dass Ihre Lunge gezählt wird. Da unser Körper bis zu 80% Wasser enthält, ist es nur sinnvoll, dass Wasser in diesem Prozess eine wichtige Rolle spielt. Das Detox-Fußbad aktiviert die Zellen und verbessert den Stoffwechsel. Alle Organe werden unschädlich gemacht und helfen dem Körper, die Gesundheit wiederherzustellen, das Immunsystem zu stärken und Krankheitserreger auszurotten Erneuerung von Körper und Geist."
+						},
+						{
+							"title": "Verfahren",
+							"text": "Sie tauchen Ihre Füße in ein Fußbad mit warmem Wasser. Die Biocleanse Detox-Fußbadeinheit ist auf die richtigen Zeiteinstellungen und Ionisationsstufen eingestellt. Dann lehnen Sie sich zurück und entspannen sich 45 Minuten lang, während das Biocleanse-Fußbad beginnt, Giftstoffe aus dem gesamten Körper, einschließlich der Nieren und der Leber, zu extrahieren und deren Fähigkeit zu stimulieren, Ihren Körper zu entgiften und zu verbessern. Kunden wird geraten, genügend Wasser zu trinken, um die Beseitigung einfacher und bequemer zu machen."
+						},
+						{
+							"title": "Prozess",
+							"text": "Elektrischer Strom fließt durch eine Reihe von Platten im Wassermodul, die in das Wasser im Fußbad eingetaucht sind. Das Fußbadwasser wird mit Meersalz versetzt, so dass es die mineralische Konzentration von Wasser aus dem Ozean hat. Wassermoleküle werden unter dem Einfluss einer bestimmten Spannung in Wasserstoff und Sauerstoff gespalten. Die negativen Ionen, die während dieses Prozesses freigesetzt werden, neutralisieren die giftigen freien Radikale in Ihrem Körper, die zur Verjüngung der Zellen beitragen."
+						},
+						{
+							"title": "Detox",
+							"text": "Manche Menschen spüren möglicherweise ein leichtes Kitzeln oder Kribbeln des ionischen Detox-Fußbades in ihren Füßen. Nach der Entgiftung ist Ihr Körper besser gerüstet, um andere Toxine, Viren und Schadstoffe zu stoppen. Das Fußbad aktiviert auch das körpereigene Lymphsystem, das nach einer Sitzung für 24 bis 48 Stunden zur dauerhaften Entgiftung beiträgt. Es wird empfohlen, mit insgesamt 10 Sitzungen über einen Zeitraum von 3 bis 5 Wochen zu beginnen, um die Entgiftung zu maximieren."
+						}
+					],
+					"faqs": [
+						{
+							"question": "Wer hat BioCleanse entdeckt?",
+							"answer": "Beide Frequenzsysteme, entdeckt vom amerikanischen Wissenschaftler Royal Raymond Rife und dem deutschen Physiker W.O. Schumann hat sich als wirksame Methode zur Bekämpfung von Krankheitserregern und zur Stimulierung der Selbstheilungskräfte des Körpers erwiesen."
+						},
+						{
+							"question": "Wie kommt es, dass wasserfarben?",
+							"answer": "Das Wasser reagiert auf die elektrische Spannung und ein Magnetfeld. Es wird sich verfärben, auch wenn Sie Ihre Füße nicht hineinlegen. Sobald Sie Ihre Füße hineinlegen, wird das Wasser eine viel intensivere Farbe annehmen, was zum Teil darauf zurückzuführen ist, dass die Giftstoffe Ihren Körper verlassen. Die endgültige Farbe des Wassers hängt von der Menge der Giftstoffe in Ihrem Körper ab. Der Effekt der freigesetzten Energie auf Zellebene und Ihrem bioenergetischen Feld ist jedoch für den Entgiftungsprozess viel wichtiger."
+						},
+						{
+							"question": "Wie kann BioCleanse mein energiepegel erneuern?",
+							"answer": "Die vom Gerät erzeugten Energiefelder gleichen das Energiefeld Ihres Körpers aus und stimulieren die natürlichen Funktionen Ihres Körpers. Dieser Vorgang wird als Bio-Aufladung bezeichnet. Das Biocleanse-Gerät ist das einzige Detox-Fußbad, das diese Funktionen bietet und sicher in der Anwendung ist."
+						},
+						{
+							"question": "Kann ich das wassermodul berühren?",
+							"answer": "Ja, Berühren hat keinen Einfluss auf die Behandlung und ist in keiner Weise schädlich für den Körper. Wir empfehlen Ihnen jedoch, während der Behandlung so wenig wie möglich Sport zu treiben. Wenn Sie dem Wassermodul erlauben, seine Arbeit zu verrichten, können Sie die Toxine leichter finden und identifizieren"
+						},
+						{
+							"question": "Wie kommen doubbles in das wasser?",
+							"answer": "Sie entstehen durch die chemische Reaktion, die die Wasserstoff- und Sauerstoffmoleküle spaltet."
+						},
+						{
+							"question": "Wann ist BioCleanse wirksam?",
+							"answer": "Durch Einstellen verschiedener Einstellungen für eine Reihe von Frequenzen kann das Biocleanse-Gerät bei Arthritis, Fibromyalgie, Leberfunktionsstörungen, Krankheitserregern, Parasitenrelaxation und Schuman / Rife Abhilfe schaffen. Biocleanse Fußbäder haben sich auch als wirksam gegen niedrige Energie, Stress, Depressionen, Angstzustände, Schmerzen, Erkältungen und Grippe erwiesen."
+						}
+					],
+					"cta_title": "Erleben Sie es selbst",
+					"cta_text": "Eine Sitzung dauert etwa 45 Minuten. Bringen Sie eine Flasche Wasser mit."
+				},
+				"translationOf": "page-how-it-works-en"
+			},
+			{
+				"id": "page-gallery-de",
+				"slug": "inspiration",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"template": "gallery",
+					"title": "Inspiration",
+					"eyebrow": "Inspiration",
+					"hero_title": "Ein Blick ins Studio",
+					"hero_text": "Schauen Sie sich in unseren Behandlungsräumen in Roermond um.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz.jpg",
+							"alt": "Clenz studio",
+							"filename": "clenz.jpg"
+						}
+					},
+					"gallery": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-2.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-2.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-13.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-13.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-15.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-15.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-12.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-12.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-10.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-10.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-8.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-8.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-9.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-9.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-7.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-7.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-4.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-4.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-6.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-6.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-5.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-5.jpg"
+								}
+							},
+							"caption": ""
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2023/06/clenz-3.jpg",
+									"alt": "Clenz studio",
+									"filename": "clenz-3.jpg"
+								}
+							},
+							"caption": ""
+						}
+					]
+				},
+				"translationOf": "page-gallery-en"
+			},
+			{
+				"id": "page-contact-de",
+				"slug": "contact",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"template": "contact",
+					"title": "Kontakt",
+					"eyebrow": "Kontakt",
+					"hero_title": "Besuchen Sie uns in Roermond",
+					"hero_text": "Kommen Sie während der Öffnungszeiten vorbei, rufen Sie an oder buchen Sie online.",
+					"hero_image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/podiumn.jpg",
+							"alt": "The Clenz studio",
+							"filename": "podiumn.jpg"
+						}
+					},
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k239",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k240",
+									"text": "Nach Feierabend können zie gern anrufen, um einen Termin vereinbaren. Während der Öffnungszeiten können Sie jederzeit ohne Termin vorbeikommen.",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"translationOf": "page-contact-en"
+			},
+			{
+				"id": "page-privacy-de",
+				"slug": "privacy",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"template": "legal",
+					"title": "Datenschutzerklärung",
+					"eyebrow": "Datenschutz",
+					"hero_title": "Datenschutzerklärung",
+					"hero_text": "",
+					"body": [
+						{
+							"_type": "block",
+							"_key": "k241",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k242",
+									"text": "Die hier dargestellten Informationen dienen ausschließlich Bildungszwecken. Der Inhalt ist kein Ersatz für medizinische Beratung oder Behandlung. Sie sollten die Informationen auf dieser Website nicht verwenden, um ein Gesundheitsproblem, einen Zustand oder eine Krankheit zu diagnostizieren oder zu behandeln, ohne einen Arzt zu konsultieren.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k243",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k244",
+									"text": "Personenbezogene Daten",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k245",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k246",
+									"text": "Wir können Sie um personenbezogene Daten bitten (wie Name, Adresse, Telefonnummer, E-Mail-Adresse und/oder andere Angaben, die einen physischen oder Online-Kontakt mit Ihnen ermöglichen) im Zusammenhang mit der Nutzung unserer Website, wenn Sie uns Vorschläge oder Fragen senden, Produkte, Dienstleistungen oder weitere Informationen anfordern (auch per E-Mail) sowie im Zusammenhang mit anderen Aktivitäten, Diensten oder Angeboten auf unserer Website. In all diesen Fällen erheben wir personenbezogene Daten nur, wenn Sie sie uns freiwillig zur Verfügung stellen. Sofern in dieser Erklärung nicht anders angegeben, bemühen wir uns angemessen, personenbezogene Daten niemals wissentlich ohne Ihre Zustimmung an Dritte weiterzugeben, außer wie hier beschrieben oder wie gesetzlich erlaubt oder vorgeschrieben. Wir können Sie auf Grundlage der Angaben, die Sie online machen, kontaktieren.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k247",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k248",
+									"text": "Mit Ihrer Erlaubnis können wir personenbezogene Daten auch für interne oder externe Marketing- und Werbezwecke verwenden. So senden wir Ihnen gelegentlich E-Mails über ein Produkt oder eine Dienstleistung, die Sie interessieren könnte. Um Ihre Zustimmung einzuholen, bieten wir Ihnen die Möglichkeit, sich anzumelden, wenn wir Sie nach Ihren persönlichen Daten fragen. Wenn Sie sich anmelden, können Sie sich jederzeit wieder abmelden. Bitte beachten Sie, dass Sie ohne Anmeldung oder nach einer Abmeldung möglicherweise bestimmte Vorteile nicht nutzen können, für die ein Name, eine E-Mail-Adresse, eine Telefonnummer oder andere personenbezogene Daten erforderlich sind.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k249",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k250",
+									"text": "Nicht personenbezogene Daten",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k251",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k252",
+									"text": "Wir erheben nicht personenbezogene Daten unter anderem mit den folgenden Methoden:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k253",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k254",
+									"text": "Cookie-Technologie: Ein „Cookie\" ist ein Datenelement, das eine Website an Ihren Browser senden kann, der es anschließend auf Ihrem System speichern kann.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k255",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k256",
+									"text": "IP-Adressen-Erfassung: Eine IP-Adresse ist eine Nummer, die Ihrem Computer im Internet zugewiesen wird. Wenn Sie Seiten unserer Website aufrufen, registrieren unsere Server Ihre IP-Adresse.",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"translationOf": "page-privacy-en"
+			}
+		],
+		"treatments": [
+			{
+				"id": "treat-detox-footbath-en",
+				"slug": "detox-footbath",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Ionic Biocleanse Foot Bath",
+					"category": "detox",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/sinks-1.jpg",
+							"alt": "Ionic Biocleanse Foot Bath",
+							"filename": "sinks-1.jpg"
+						}
+					},
+					"prices": "55 min | from €40",
+					"summary": "The BioCleanse ionic footbath, the heart of Clenz.",
+					"sort_order": 0
+				}
+			},
+			{
+				"id": "treat-detox-footbath-nl",
+				"slug": "detox-footbath",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Ionisch Biocleanse-voetenbad",
+					"category": "detox",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/sinks-1.jpg",
+							"alt": "Ionisch Biocleanse-voetenbad",
+							"filename": "sinks-1.jpg"
+						}
+					},
+					"prices": "55 min | vanaf € 40",
+					"summary": "Het BioCleanse ionische voetenbad, het hart van Clenz.",
+					"sort_order": 0
+				},
+				"translationOf": "treat-detox-footbath-en"
+			},
+			{
+				"id": "treat-detox-footbath-de",
+				"slug": "detox-footbath",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Ionisches Biocleanse-Fußbad",
+					"category": "detox",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/sinks-1.jpg",
+							"alt": "Ionisches Biocleanse-Fußbad",
+							"filename": "sinks-1.jpg"
+						}
+					},
+					"prices": "55 Min. | ab 40 €",
+					"summary": "Das BioCleanse Ionen-Fußbad, das Herz von Clenz.",
+					"sort_order": 0
+				},
+				"translationOf": "treat-detox-footbath-en"
+			},
+			{
+				"id": "treat-healy-frequencies-en",
+				"slug": "healy-frequencies",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Healy Frequencies",
+					"category": "detox",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2021/07/healy.jpg",
+							"alt": "Healy Frequencies",
+							"filename": "healy.jpg"
+						}
+					},
+					"prices": "55–75 min | from €45",
+					"summary": "A relaxing frequency session with the Healy device.",
+					"sort_order": 1
+				}
+			},
+			{
+				"id": "treat-healy-frequencies-nl",
+				"slug": "healy-frequencies",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Healy-frequenties",
+					"category": "detox",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2021/07/healy.jpg",
+							"alt": "Healy-frequenties",
+							"filename": "healy.jpg"
+						}
+					},
+					"prices": "55–75 min | vanaf € 45",
+					"summary": "Een ontspannende frequentiesessie met het Healy-apparaat.",
+					"sort_order": 1
+				},
+				"translationOf": "treat-healy-frequencies-en"
+			},
+			{
+				"id": "treat-healy-frequencies-de",
+				"slug": "healy-frequencies",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Healy-Frequenzen",
+					"category": "detox",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2021/07/healy.jpg",
+							"alt": "Healy-Frequenzen",
+							"filename": "healy.jpg"
+						}
+					},
+					"prices": "55–75 Min. | ab 45 €",
+					"summary": "Eine entspannende Frequenzsitzung mit dem Healy-Gerät.",
+					"sort_order": 1
+				},
+				"translationOf": "treat-healy-frequencies-en"
+			},
+			{
+				"id": "treat-infrared-heat-therapy-en",
+				"slug": "infrared-heat-therapy",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Infrared Jade Heat Mat",
+					"category": "detox",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/clenz-247.jpg",
+							"alt": "Infrared Jade Heat Mat",
+							"filename": "clenz-247.jpg"
+						}
+					},
+					"prices": "30–40 min | price on request",
+					"summary": "Lie back on a warm mat of jade stones whose far-infrared heat relaxes muscles and supports circulation.",
+					"sort_order": 2
+				}
+			},
+			{
+				"id": "treat-infrared-heat-therapy-nl",
+				"slug": "infrared-heat-therapy",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Infrarood jade-warmtemat",
+					"category": "detox",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/clenz-247.jpg",
+							"alt": "Infrarood jade-warmtemat",
+							"filename": "clenz-247.jpg"
+						}
+					},
+					"prices": "30–40 min | prijs op aanvraag",
+					"summary": "Lig op een warme mat met jadestenen waarvan de verre infraroodwarmte spieren ontspant en de doorbloeding ondersteunt.",
+					"sort_order": 2
+				},
+				"translationOf": "treat-infrared-heat-therapy-en"
+			},
+			{
+				"id": "treat-infrared-heat-therapy-de",
+				"slug": "infrared-heat-therapy",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Infrarot-Jade-Wärmematte",
+					"category": "detox",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/clenz-247.jpg",
+							"alt": "Infrarot-Jade-Wärmematte",
+							"filename": "clenz-247.jpg"
+						}
+					},
+					"prices": "30–40 Min. | Preis auf Anfrage",
+					"summary": "Entspannen Sie auf einer warmen Matte aus Jadesteinen, deren Ferninfrarot-Wärme die Muskeln lockert und die Durchblutung fördert.",
+					"sort_order": 2
+				},
+				"translationOf": "treat-infrared-heat-therapy-en"
+			},
+			{
+				"id": "treat-relaxation-en",
+				"slug": "relaxation",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Relax Classic Massage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/relax.jpg",
+							"alt": "Relax Classic Massage",
+							"filename": "relax.jpg"
+						}
+					},
+					"prices": "30–80 min | from €40",
+					"summary": "Slow, flowing strokes to let go of stress.",
+					"sort_order": 0
+				}
+			},
+			{
+				"id": "treat-relaxation-nl",
+				"slug": "relaxation",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Klassieke ontspanningsmassage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/relax.jpg",
+							"alt": "Klassieke ontspanningsmassage",
+							"filename": "relax.jpg"
+						}
+					},
+					"prices": "30–80 min | vanaf € 40",
+					"summary": "Rustige, vloeiende bewegingen om stress los te laten.",
+					"sort_order": 0
+				},
+				"translationOf": "treat-relaxation-en"
+			},
+			{
+				"id": "treat-relaxation-de",
+				"slug": "relaxation",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Klassische Entspannungsmassage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/relax.jpg",
+							"alt": "Klassische Entspannungsmassage",
+							"filename": "relax.jpg"
+						}
+					},
+					"prices": "30–80 Min. | ab 40 €",
+					"summary": "Langsame, fließende Griffe, um Stress loszulassen.",
+					"sort_order": 0
+				},
+				"translationOf": "treat-relaxation-en"
+			},
+			{
+				"id": "treat-hotstone-en",
+				"slug": "hotstone",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Hot Stone Massage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/stone2.jpg",
+							"alt": "Hot Stone Massage",
+							"filename": "stone2.jpg"
+						}
+					},
+					"prices": "30–80 min | from €40",
+					"summary": "Warm stones melt away tension in tight muscles.",
+					"sort_order": 1
+				}
+			},
+			{
+				"id": "treat-hotstone-nl",
+				"slug": "hotstone",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Hotstonemassage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/stone2.jpg",
+							"alt": "Hotstonemassage",
+							"filename": "stone2.jpg"
+						}
+					},
+					"prices": "30–80 min | vanaf € 40",
+					"summary": "Warme stenen laten spanning in strakke spieren wegsmelten.",
+					"sort_order": 1
+				},
+				"translationOf": "treat-hotstone-en"
+			},
+			{
+				"id": "treat-hotstone-de",
+				"slug": "hotstone",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Hot-Stone-Massage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/stone2.jpg",
+							"alt": "Hot-Stone-Massage",
+							"filename": "stone2.jpg"
+						}
+					},
+					"prices": "30–80 Min. | ab 40 €",
+					"summary": "Warme Steine lösen Spannungen in festen Muskeln.",
+					"sort_order": 1
+				},
+				"translationOf": "treat-hotstone-en"
+			},
+			{
+				"id": "treat-head-neck-shoulders-en",
+				"slug": "head-neck-shoulders",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Head, Neck and Shoulders",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/nek.jpg",
+							"alt": "Head, Neck and Shoulders",
+							"filename": "nek.jpg"
+						}
+					},
+					"prices": "30–40 min | from €40",
+					"summary": "Targeted relief for desk-bound shoulders.",
+					"sort_order": 2
+				}
+			},
+			{
+				"id": "treat-head-neck-shoulders-nl",
+				"slug": "head-neck-shoulders",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Hoofd, nek en schouders",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/nek.jpg",
+							"alt": "Hoofd, nek en schouders",
+							"filename": "nek.jpg"
+						}
+					},
+					"prices": "30–40 min | vanaf € 40",
+					"summary": "Gerichte verlichting voor schouders van kantoorwerkers.",
+					"sort_order": 2
+				},
+				"translationOf": "treat-head-neck-shoulders-en"
+			},
+			{
+				"id": "treat-head-neck-shoulders-de",
+				"slug": "head-neck-shoulders",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Kopf, Nacken und Schultern",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/nek.jpg",
+							"alt": "Kopf, Nacken und Schultern",
+							"filename": "nek.jpg"
+						}
+					},
+					"prices": "30–40 Min. | ab 40 €",
+					"summary": "Gezielte Entlastung für verspannte Schultern.",
+					"sort_order": 2
+				},
+				"translationOf": "treat-head-neck-shoulders-en"
+			},
+			{
+				"id": "treat-combi-en",
+				"slug": "combi",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Combi Massage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/com-bi.jpg",
+							"alt": "Combi Massage",
+							"filename": "com-bi.jpg"
+						}
+					},
+					"prices": "45–80 min | from €50",
+					"summary": "Relaxing and firmer techniques combined in one massage.",
+					"sort_order": 3
+				}
+			},
+			{
+				"id": "treat-combi-nl",
+				"slug": "combi",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Combimassage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/com-bi.jpg",
+							"alt": "Combimassage",
+							"filename": "com-bi.jpg"
+						}
+					},
+					"prices": "45–80 min | vanaf € 50",
+					"summary": "Ontspannende en stevigere technieken gecombineerd in één massage.",
+					"sort_order": 3
+				},
+				"translationOf": "treat-combi-en"
+			},
+			{
+				"id": "treat-combi-de",
+				"slug": "combi",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Kombi-Massage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/com-bi.jpg",
+							"alt": "Kombi-Massage",
+							"filename": "com-bi.jpg"
+						}
+					},
+					"prices": "45–80 Min. | ab 50 €",
+					"summary": "Entspannende und kräftigere Techniken in einer Massage kombiniert.",
+					"sort_order": 3
+				},
+				"translationOf": "treat-combi-en"
+			},
+			{
+				"id": "treat-sport-massage-en",
+				"slug": "sport-massage",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Sports Massage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/sport.jpg",
+							"alt": "Sports Massage",
+							"filename": "sport.jpg"
+						}
+					},
+					"prices": "45–80 min | from €50",
+					"summary": "Prepare for or recover from training.",
+					"sort_order": 4
+				}
+			},
+			{
+				"id": "treat-sport-massage-nl",
+				"slug": "sport-massage",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Sportmassage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/sport.jpg",
+							"alt": "Sportmassage",
+							"filename": "sport.jpg"
+						}
+					},
+					"prices": "45–80 min | vanaf € 50",
+					"summary": "Voorbereiden op of herstellen van training.",
+					"sort_order": 4
+				},
+				"translationOf": "treat-sport-massage-en"
+			},
+			{
+				"id": "treat-sport-massage-de",
+				"slug": "sport-massage",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Sportmassage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/sport.jpg",
+							"alt": "Sportmassage",
+							"filename": "sport.jpg"
+						}
+					},
+					"prices": "45–80 Min. | ab 50 €",
+					"summary": "Zur Vorbereitung auf oder Erholung vom Training.",
+					"sort_order": 4
+				},
+				"translationOf": "treat-sport-massage-en"
+			},
+			{
+				"id": "treat-deep-tissue-triggerpoint-en",
+				"slug": "deep-tissue-triggerpoint",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Deep Tissue & Trigger Point Massage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/deep.jpg",
+							"alt": "Deep Tissue & Trigger Point Massage",
+							"filename": "deep.jpg"
+						}
+					},
+					"prices": "40–80 min | from €45",
+					"summary": "Firm pressure on knots and trigger points.",
+					"sort_order": 5
+				}
+			},
+			{
+				"id": "treat-deep-tissue-triggerpoint-nl",
+				"slug": "deep-tissue-triggerpoint",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Deep tissue- en triggerpointmassage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/deep.jpg",
+							"alt": "Deep tissue- en triggerpointmassage",
+							"filename": "deep.jpg"
+						}
+					},
+					"prices": "40–80 min | vanaf € 45",
+					"summary": "Stevige druk op knopen en triggerpoints.",
+					"sort_order": 5
+				},
+				"translationOf": "treat-deep-tissue-triggerpoint-en"
+			},
+			{
+				"id": "treat-deep-tissue-triggerpoint-de",
+				"slug": "deep-tissue-triggerpoint",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Tiefengewebs- und Triggerpunktmassage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/deep.jpg",
+							"alt": "Tiefengewebs- und Triggerpunktmassage",
+							"filename": "deep.jpg"
+						}
+					},
+					"prices": "40–80 Min. | ab 45 €",
+					"summary": "Kräftiger Druck auf Verspannungen und Triggerpunkte.",
+					"sort_order": 5
+				},
+				"translationOf": "treat-deep-tissue-triggerpoint-en"
+			},
+			{
+				"id": "treat-pregnancy-en",
+				"slug": "pregnancy",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Pregnancy Massage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/prego.jpg",
+							"alt": "Pregnancy Massage",
+							"filename": "prego.jpg"
+						}
+					},
+					"prices": "60 min · €65 | 80 min · €80",
+					"summary": "Gentle, safe comfort for mums-to-be.",
+					"sort_order": 6
+				}
+			},
+			{
+				"id": "treat-pregnancy-nl",
+				"slug": "pregnancy",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Zwangerschapsmassage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/prego.jpg",
+							"alt": "Zwangerschapsmassage",
+							"filename": "prego.jpg"
+						}
+					},
+					"prices": "60 min · € 65 | 80 min · € 80",
+					"summary": "Zacht en veilig comfort voor aanstaande moeders.",
+					"sort_order": 6
+				},
+				"translationOf": "treat-pregnancy-en"
+			},
+			{
+				"id": "treat-pregnancy-de",
+				"slug": "pregnancy",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Schwangerschaftsmassage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/prego.jpg",
+							"alt": "Schwangerschaftsmassage",
+							"filename": "prego.jpg"
+						}
+					},
+					"prices": "60 Min. · 65 € | 80 Min. · 80 €",
+					"summary": "Sanfte, sichere Entspannung für werdende Mütter.",
+					"sort_order": 6
+				},
+				"translationOf": "treat-pregnancy-en"
+			},
+			{
+				"id": "treat-duo-massage-en",
+				"slug": "duo-massage",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Duo Massage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/stone2.jpg",
+							"alt": "Duo Massage",
+							"filename": "stone2.jpg"
+						}
+					},
+					"prices": "60 min | €110",
+					"summary": "A relaxation massage with hot stones for two, side by side.",
+					"sort_order": 7
+				}
+			},
+			{
+				"id": "treat-duo-massage-nl",
+				"slug": "duo-massage",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Duomassage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/stone2.jpg",
+							"alt": "Duomassage",
+							"filename": "stone2.jpg"
+						}
+					},
+					"prices": "60 min | € 110",
+					"summary": "Een ontspanningsmassage met hotstones voor twee, naast elkaar.",
+					"sort_order": 7
+				},
+				"translationOf": "treat-duo-massage-en"
+			},
+			{
+				"id": "treat-duo-massage-de",
+				"slug": "duo-massage",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Duo-Massage",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/stone2.jpg",
+							"alt": "Duo-Massage",
+							"filename": "stone2.jpg"
+						}
+					},
+					"prices": "60 Min. | 110 €",
+					"summary": "Eine Entspannungsmassage mit heißen Steinen für zwei, Seite an Seite.",
+					"sort_order": 7
+				},
+				"translationOf": "treat-duo-massage-en"
+			},
+			{
+				"id": "treat-duo-massage-2-en",
+				"slug": "duo-massage-2",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Duo Massage 2",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/relax.jpg",
+							"alt": "Duo Massage 2",
+							"filename": "relax.jpg"
+						}
+					},
+					"prices": "80 min | €130",
+					"summary": "The longer duo massage, for extra time together.",
+					"sort_order": 8
+				}
+			},
+			{
+				"id": "treat-duo-massage-2-nl",
+				"slug": "duo-massage-2",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Duomassage 2",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/relax.jpg",
+							"alt": "Duomassage 2",
+							"filename": "relax.jpg"
+						}
+					},
+					"prices": "80 min | € 130",
+					"summary": "De langere duomassage, voor extra tijd samen.",
+					"sort_order": 8
+				},
+				"translationOf": "treat-duo-massage-2-en"
+			},
+			{
+				"id": "treat-duo-massage-2-de",
+				"slug": "duo-massage-2",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Duo-Massage 2",
+					"category": "massage",
+					"image": {
+						"$media": {
+							"url": "https://darkseagreen-narwhal-544027.hostingersite.com/wp-content/uploads/2019/05/relax.jpg",
+							"alt": "Duo-Massage 2",
+							"filename": "relax.jpg"
+						}
+					},
+					"prices": "80 Min. | 130 €",
+					"summary": "Die längere Duo-Massage für mehr gemeinsame Zeit.",
+					"sort_order": 8
+				},
+				"translationOf": "treat-duo-massage-2-en"
+			}
+		],
+		"testimonials": [
+			{
+				"id": "testi-0-en",
+				"slug": "testimonial-1",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Katrina",
+					"quote": "I can highly recommend Arthur's Deep Tissue & Stone massage!!! It was Amazing!!! One of the best massages I've ever had!! The warm Stones are Glorious!! It was so relaxing & I felt he loosened up some tight muscles so I am very Grateful!!! Thanks Arthur, it was Awesome!!!!!!",
+					"sort_order": 0
+				}
+			},
+			{
+				"id": "testi-2-en",
+				"slug": "testimonial-3",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Ellie",
+					"quote": "De Bio cleance is een super apparaat ,het geeft geweldige verlichting bij vermoeidheid als je jezelf voorbij loopt en zeker bij ongemakken zoals fibromyalgie etc geeft het veel verlichting.Ik heb het apparaat zelf aangeschaft en wil ook graag andere mensen helpen.ik zit in het uiterste zuiden van het land en met de kennis van Arthur en Anja hoop ik u ook te kunnen helpen Groetjes van Ellie Penders uit Geleen",
+					"sort_order": 2
+				}
+			},
+			{
+				"id": "testi-3-en",
+				"slug": "testimonial-4",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Danielle",
+					"quote": "Is geen massage maar een experience. De detox is ook zeker een aanrader. Je kunt niet in betere handen zijn.",
+					"sort_order": 3
+				}
+			},
+			{
+				"id": "testi-4-en",
+				"slug": "testimonial-5",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Chai",
+					"quote": "I had the hot stone massage with Arthur and it was brilliant. Highly recommend Clenz as it was one of the best massage treatments i have ever had. I have a 1 year old and had a few knots here and there but he was able to get rid of the ``bumpy road`` in one session. The oils also smell amazing. I hope to be back again soon! Thanks heaps",
+					"sort_order": 4
+				}
+			},
+			{
+				"id": "testi-5-en",
+				"slug": "testimonial-6",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Angela",
+					"quote": "Super (stoel)massage van Arthur gehad. En detox voetenbad van Anja. Wat een fijne en kundige mensen zijn Anja en Arthur. Een echte aanrader.",
+					"sort_order": 5
+				}
+			},
+			{
+				"id": "testi-6-en",
+				"slug": "testimonial-7",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Rody",
+					"quote": "I always enjoyed my visit to Anja and Arthur’s spa while still located in Amsterdam. They were Pioneers and introduced the detox footbath in Holland. With the footbath came holistic philosophy and the production of healthy snacks. Clients if the footbath were always served spectacular natural crackers made by Anja and Arthur. They also produced a special juice of which I can not recollect the name. They are very dedicated and involved. They really care about their customers which often become friends.",
+					"sort_order": 6
+				}
+			},
+			{
+				"id": "testi-7-en",
+				"slug": "testimonial-8",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Maureen",
+					"quote": "Fijne mensen die hun vak goed beheersen! Na een behandeling voel je je herboren",
+					"sort_order": 7
+				}
+			},
+			{
+				"id": "testi-8-en",
+				"slug": "testimonial-9",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Aislinn",
+					"quote": "Anja was very accurate with her findings and could really point out what was unknowingly happening to my body. I found out that all the emotional (stress) really had a negative impact on my body, which I could not see before. Also, I had a lot of trouble with my energy level and after several cleanses I have noticed that gradually my energy level was coming back. It was a good lesson for me to really look after my own body and especially to the negative processes which you can not see from the outside. Now as an owner of the Bio Cleanse machine I am still using it to maintain my body health and it is really good for helping my body get rid of stress from work and all those negative emotions which my body holds on to.",
+					"sort_order": 8
+				}
+			},
+			{
+				"id": "testi-0-nl",
+				"slug": "testimonial-1",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Katrina",
+					"quote": "I can highly recommend Arthur's Deep Tissue & Stone massage!!! It was Amazing!!! One of the best massages I've ever had!! The warm Stones are Glorious!! It was so relaxing & I felt he loosened up some tight muscles so I am very Grateful!!! Thanks Arthur, it was Awesome!!!!!!",
+					"sort_order": 0
+				},
+				"translationOf": "testi-0-en"
+			},
+			{
+				"id": "testi-2-nl",
+				"slug": "testimonial-3",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Ellie",
+					"quote": "De Bio cleance is een super apparaat ,het geeft geweldige verlichting bij vermoeidheid als je jezelf voorbij loopt en zeker bij ongemakken zoals fibromyalgie etc geeft het veel verlichting.Ik heb het apparaat zelf aangeschaft en wil ook graag andere mensen helpen.ik zit in het uiterste zuiden van het land en met de kennis van Arthur en Anja hoop ik u ook te kunnen helpen\nGroetjes van Ellie Penders uit Geleen",
+					"sort_order": 2
+				},
+				"translationOf": "testi-2-en"
+			},
+			{
+				"id": "testi-3-nl",
+				"slug": "testimonial-4",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Danielle",
+					"quote": "Is geen massage maar een experience. De detox is ook zeker een aanrader. Je kunt niet in betere handen zijn.",
+					"sort_order": 3
+				},
+				"translationOf": "testi-3-en"
+			},
+			{
+				"id": "testi-4-nl",
+				"slug": "testimonial-5",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Chai",
+					"quote": "I had the hot stone massage with Arthur and it was brilliant. Highly recommend Clenz as it was one of the best massage treatments i have ever had. I have a 1 year old and had a few knots here and there but he was able to get rid of the ``bumpy road`` in one session. The oils also smell amazing. I hope to be back again soon! Thanks heaps",
+					"sort_order": 4
+				},
+				"translationOf": "testi-4-en"
+			},
+			{
+				"id": "testi-5-nl",
+				"slug": "testimonial-6",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Angela",
+					"quote": "Super (stoel)massage van Arthur gehad. En detox voetenbad van Anja. Wat een fijne en kundige mensen zijn Anja en Arthur. Een echte aanrader.",
+					"sort_order": 5
+				},
+				"translationOf": "testi-5-en"
+			},
+			{
+				"id": "testi-6-nl",
+				"slug": "testimonial-7",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Rody",
+					"quote": "I always enjoyed my visit to Anja and Arthur’s spa while still located in Amsterdam. They were Pioneers and introduced the detox footbath in Holland. With the footbath came holistic philosophy and the production of healthy snacks. Clients if the footbath were always served spectacular natural crackers made by Anja and Arthur. They also produced a special juice of which I can not recollect the name. They are very dedicated and involved. They really care about their customers which often become friends.",
+					"sort_order": 6
+				},
+				"translationOf": "testi-6-en"
+			},
+			{
+				"id": "testi-7-nl",
+				"slug": "testimonial-8",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Maureen",
+					"quote": "Fijne mensen die hun vak goed beheersen! Na een behandeling voel je je herboren",
+					"sort_order": 7
+				},
+				"translationOf": "testi-7-en"
+			},
+			{
+				"id": "testi-8-nl",
+				"slug": "testimonial-9",
+				"locale": "nl",
+				"status": "published",
+				"data": {
+					"title": "Aislinn",
+					"quote": "Anja was very accurate with her findings and could really point out what was unknowingly happening to my body. I found out that all the emotional (stress) really had a negative impact on my body, which I could not see before. Also, I had a lot of trouble with my energy level and after several cleanses I have noticed that gradually my energy level was coming back. It was a good lesson for me to really look after my own body and especially to the negative processes which you can not see from the outside. Now as an owner of the Bio Cleanse machine I am still using it to maintain my body health and it is really good for helping my body get rid of stress from work and all those negative emotions which my body holds on to.",
+					"sort_order": 8
+				},
+				"translationOf": "testi-8-en"
+			},
+			{
+				"id": "testi-0-de",
+				"slug": "testimonial-1",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Katrina",
+					"quote": "I can highly recommend Arthur's Deep Tissue & Stone massage!!! It was Amazing!!! One of the best massages I've ever had!! The warm Stones are Glorious!! It was so relaxing & I felt he loosened up some tight muscles so I am very Grateful!!! Thanks Arthur, it was Awesome!!!!!!",
+					"sort_order": 0
+				},
+				"translationOf": "testi-0-en"
+			},
+			{
+				"id": "testi-2-de",
+				"slug": "testimonial-3",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Ellie",
+					"quote": "De Bio cleance is een super apparaat ,het geeft geweldige verlichting bij vermoeidheid als je jezelf voorbij loopt en zeker bij ongemakken zoals fibromyalgie etc geeft het veel verlichting.Ik heb het apparaat zelf aangeschaft en wil ook graag andere mensen helpen.ik zit in het uiterste zuiden van het land en met de kennis van Arthur en Anja hoop ik u ook te kunnen helpen Groetjes van Ellie Penders uit Geleen",
+					"sort_order": 2
+				},
+				"translationOf": "testi-2-en"
+			},
+			{
+				"id": "testi-3-de",
+				"slug": "testimonial-4",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Danielle",
+					"quote": "Is geen massage maar een experience. De detox is ook zeker een aanrader. Je kunt niet in betere handen zijn.",
+					"sort_order": 3
+				},
+				"translationOf": "testi-3-en"
+			},
+			{
+				"id": "testi-4-de",
+				"slug": "testimonial-5",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Chai",
+					"quote": "I had the hot stone massage with Arthur and it was brilliant. Highly recommend Clenz as it was one of the best massage treatments i have ever had. I have a 1 year old and had a few knots here and there but he was able to get rid of the ``bumpy road`` in one session. The oils also smell amazing. I hope to be back again soon! Thanks heaps",
+					"sort_order": 4
+				},
+				"translationOf": "testi-4-en"
+			},
+			{
+				"id": "testi-5-de",
+				"slug": "testimonial-6",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Angela",
+					"quote": "Super (stoel)massage van Arthur gehad. En detox voetenbad van Anja. Wat een fijne en kundige mensen zijn Anja en Arthur. Een echte aanrader.",
+					"sort_order": 5
+				},
+				"translationOf": "testi-5-en"
+			},
+			{
+				"id": "testi-6-de",
+				"slug": "testimonial-7",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Rody",
+					"quote": "I always enjoyed my visit to Anja and Arthur’s spa while still located in Amsterdam. They were Pioneers and introduced the detox footbath in Holland. With the footbath came holistic philosophy and the production of healthy snacks. Clients if the footbath were always served spectacular natural crackers made by Anja and Arthur. They also produced a special juice of which I can not recollect the name. They are very dedicated and involved. They really care about their customers which often become friends.",
+					"sort_order": 6
+				},
+				"translationOf": "testi-6-en"
+			},
+			{
+				"id": "testi-7-de",
+				"slug": "testimonial-8",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Maureen",
+					"quote": "Fijne mensen die hun vak goed beheersen! Na een behandeling voel je je herboren",
+					"sort_order": 7
+				},
+				"translationOf": "testi-7-en"
+			},
+			{
+				"id": "testi-8-de",
+				"slug": "testimonial-9",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Aislinn",
+					"quote": "Anja was very accurate with her findings and could really point out what was unknowingly happening to my body. I found out that all the emotional (stress) really had a negative impact on my body, which I could not see before. Also, I had a lot of trouble with my energy level and after several cleanses I have noticed that gradually my energy level was coming back. It was a good lesson for me to really look after my own body and especially to the negative processes which you can not see from the outside. Now as an owner of the Bio Cleanse machine I am still using it to maintain my body health and it is really good for helping my body get rid of stress from work and all those negative emotions which my body holds on to.",
+					"sort_order": 8
+				},
+				"translationOf": "testi-8-en"
+			}
+		]
+	}
+}
